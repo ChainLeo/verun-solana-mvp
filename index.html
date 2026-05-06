@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verun Network — The Trust Layer for Agentic Finance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #ffffff;
+  --bg2: #f7faf8;
+  --card: #ffffff;
+  --card2: #f0f9f4;
+  --teal: #16a34a;
+  --teal-dim: rgba(22,163,74,0.08);
+  --teal-border: rgba(22,163,74,0.22);
+  --purple: #7B61FF;
+  --purple-dim: rgba(123,97,255,0.08);
+  --purple-border: rgba(123,97,255,0.22);
+  --green: #16a34a;
+  --green-dim: rgba(22,163,74,0.08);
+  --red: #dc2626;
+  --red-dim: rgba(220,38,38,0.08);
+  --amber: #d97706;
+  --amber-dim: rgba(217,119,6,0.08);
+  --blue: #2563eb;
+  --blue-dim: rgba(37,99,235,0.08);
+  --text: #111827;
+  --text2: #4b5563;
+  --text3: #9ca3af;
+  --border: rgba(0,0,0,0.08);
+  --border2: rgba(22,163,74,0.18);
+  --shadow: 0 2px 20px rgba(0,0,0,0.07);
+  --radius: 14px;
+  --mono: 'IBM Plex Mono', monospace;
+  --sans: 'Inter', sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.6;font-size:15px;overflow-x:hidden}
+a{color:var(--teal);text-decoration:none}
+.container{max-width:1100px;margin:0 auto;padding:0 24px}
+.section{padding:88px 0}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 24px;height:62px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px;color:var(--text)}
+.nav-logo .tag{font-size:9px;font-weight:800;background:var(--teal);color:#fff;padding:2px 7px;border-radius:4px;letter-spacing:0.08em}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-links a{font-size:13px;font-weight:500;color:var(--text2);transition:color 0.2s}
+.nav-links a:hover{color:var(--teal)}
+.solana-badge{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:var(--teal);background:var(--teal-dim);border:1px solid var(--teal-border);padding:4px 12px;border-radius:20px;font-family:var(--mono)}
+.solana-dot{width:6px;height:6px;background:var(--teal);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(1.5)}}
+
+/* HERO */
+.hero{padding:80px 0 0;position:relative;overflow:hidden;background:linear-gradient(160deg,#1a9e52 0%,#22c55e 60%,#16a34a 100%);padding-bottom:0}
+.hero-inner{position:relative;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:0;padding-bottom:0}
+.hero-copy{text-align:left;padding-bottom:80px}
+.hero h1{font-size:clamp(34px,4.5vw,62px);font-weight:800;line-height:1.08;color:#fff;margin-bottom:18px;letter-spacing:-0.02em}
+.hero h1 .hl{color:#fff}
+.hero-sub{font-size:17px;color:rgba(255,255,255,0.85);max-width:440px;margin:0 0 40px;line-height:1.7;font-weight:400}
+.hero-sub strong{color:#fff;font-weight:700}
+.hero-btns{display:flex;justify-content:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:0}
+@media(max-width:760px){.hero-inner{grid-template-columns:1fr}.hero-copy{padding-bottom:32px}.hero h1{font-size:34px}}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--sans);font-size:14px;font-weight:700;cursor:pointer;border:none;border-radius:10px;padding:13px 28px;transition:all 0.2s}
+.btn-teal{background:#fff;color:#16a34a}
+.btn-teal:hover{background:#f0fdf4;box-shadow:0 4px 24px rgba(0,0,0,0.15);transform:translateY(-1px)}
+.btn-outline{background:rgba(255,255,255,0.15);color:#fff;border:1.5px solid rgba(255,255,255,0.4);backdrop-filter:blur(4px)}
+.btn-outline:hover{background:rgba(255,255,255,0.25);border-color:rgba(255,255,255,0.7)}
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:4px 12px;border-radius:20px;border:1px solid var(--border)}
+.pill-teal{background:var(--teal-dim);color:var(--teal);border-color:var(--teal-border)}
+.pill-purple{background:var(--purple-dim);color:var(--purple);border-color:var(--purple-border)}
+.pill-green{background:var(--green-dim);color:var(--green);border-color:rgba(22,163,74,0.25)}
+.pill-amber{background:var(--amber-dim);color:var(--amber);border-color:rgba(217,119,6,0.25)}
+
+/* PHONE MOCKUP */
+.phone-wrap{display:flex;justify-content:center;align-items:flex-end;padding:40px 0 0;margin-right:40px}
+.phone{width:230px;background:#1a1a1a;border-radius:34px;padding:10px;box-shadow:0 32px 80px rgba(0,0,0,0.35),0 0 0 1px rgba(255,255,255,0.08);position:relative;margin-bottom:40px}
+.phone-notch{width:70px;height:22px;background:#1a1a1a;border-radius:0 0 14px 14px;margin:0 auto 6px;display:flex;align-items:center;justify-content:center;gap:6px}
+.phone-notch-cam{width:8px;height:8px;border-radius:50%;background:#333}
+.phone-notch-speaker{width:36px;height:4px;border-radius:2px;background:#333}
+.phone-screen{background:#fff;border-radius:26px;overflow:hidden;padding:0 0 16px}
+.phone-status{display:flex;justify-content:space-between;align-items:center;padding:8px 16px 6px;font-size:10px;font-weight:600;color:#333}
+.phone-status-icons{display:flex;gap:3px;align-items:center;font-size:9px}
+.trustmark-inner{padding:4px 16px 0}
+.tm-label{font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#9ca3af;text-align:center;margin-bottom:14px}
+.tm-shield{width:64px;height:64px;margin:0 auto 14px;background:linear-gradient(145deg,#f0fdf4,#dcfce7);border-radius:18px;display:flex;align-items:center;justify-content:center;border:1.5px solid rgba(22,163,74,0.2)}
+.tm-shield svg{width:32px;height:32px}
+.tm-score{text-align:center;margin-bottom:12px}
+.tm-score-num{font-size:36px;font-weight:800;color:#111827;letter-spacing:-0.02em;line-height:1}
+.tm-score-max{font-size:14px;color:#9ca3af;font-weight:500}
+.tm-verified{display:flex;align-items:center;justify-content:center;gap:6px;background:#16a34a;color:#fff;font-size:10px;font-weight:700;letter-spacing:0.1em;padding:7px 20px;border-radius:20px;margin:0 auto 14px;width:fit-content}
+.tm-validators{display:flex;justify-content:center;gap:8px;margin-bottom:8px}
+.tm-val{display:flex;flex-direction:column;align-items:center;gap:3px;background:#f8fafb;border:1px solid #e5e7eb;border-radius:8px;padding:6px 10px;min-width:44px}
+.tm-val-name{font-size:9px;font-weight:700;color:#374151;letter-spacing:0.05em}
+.tm-val-check{font-size:10px;color:#16a34a;font-weight:700}
+.tm-footer{text-align:center;padding-top:8px;border-top:1px solid #f0f0f0;margin:0 16px}
+.tm-footer-logo{font-size:9px;font-weight:700;color:#9ca3af;letter-spacing:0.08em}
+
+/* 3 MODES */
+.modes-section{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.modes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:48px;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.mode-card{padding:28px 24px;border-right:1px solid var(--border);position:relative}
+.mode-card:last-child{border-right:none}
+.mode-num{font-family:var(--mono);font-size:10px;font-weight:600;color:var(--text3);margin-bottom:12px;letter-spacing:0.1em}
+.mode-icon{font-size:28px;margin-bottom:12px}
+.mode-title{font-size:16px;font-weight:700;color:var(--text);margin-bottom:8px}
+.mode-desc{font-size:13px;color:var(--text2);line-height:1.65;margin-bottom:16px}
+.mode-tag{font-size:10px;font-weight:700;padding:3px 10px;border-radius:4px;display:inline-block}
+.mode-tag.teal{background:var(--teal-dim);color:var(--teal);border:1px solid var(--teal-border)}
+.mode-tag.amber{background:var(--amber-dim);color:var(--amber);border:1px solid rgba(255,176,32,0.25)}
+.mode-tag.purple{background:var(--purple-dim);color:var(--purple);border:1px solid var(--purple-border)}
+.mode-arrow{position:absolute;right:-14px;top:50%;transform:translateY(-50%);width:28px;height:28px;background:var(--bg2);border:1px solid var(--teal-border);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--teal);font-size:12px;z-index:1}
+
+/* SECTION HEADER */
+.section-label{font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
+.section-h2{font-size:clamp(26px,3.5vw,38px);font-weight:800;color:var(--text);line-height:1.15;margin-bottom:14px;letter-spacing:-0.01em}
+.section-sub{font-size:15px;color:var(--text2);line-height:1.7;max-width:560px}
+
+/* DEMO */
+.demo-section{background:var(--bg)}
+.demo-layout{display:grid;grid-template-columns:1fr;gap:24px;align-items:start;margin-top:40px;max-width:680px;margin-left:auto;margin-right:auto}
+
+/* MODE TABS */
+.mode-tabs{display:flex;justify-content:center;gap:0;margin:32px auto 0;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:4px;width:fit-content}
+.mode-tab{font-family:var(--sans);font-size:12px;font-weight:600;padding:7px 20px;border-radius:7px;border:none;background:transparent;color:var(--text2);cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:7px}
+.mode-tab.active{background:var(--teal);color:#fff;box-shadow:0 2px 12px rgba(22,163,74,0.25)}
+.mode-tab.auto-tab.active{background:var(--purple);color:#fff;box-shadow:0 2px 12px rgba(123,97,255,0.3)}
+
+/* STEP PANEL */
+.step-panel{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow);min-height:520px;display:flex;flex-direction:column}
+.step-dots{display:flex;align-items:center;margin-bottom:26px}
+.step-dot-wrap{display:flex;align-items:center;flex:1}
+.step-dot{width:26px;height:26px;border-radius:50%;border:2px solid var(--border);background:var(--bg);color:var(--text3);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s;flex-shrink:0}
+.step-dot.active{background:var(--teal);border-color:var(--teal);color:#fff;box-shadow:0 0 0 4px rgba(22,163,74,0.15)}
+.step-dot.done{background:var(--teal);border-color:var(--teal);color:#fff}
+.step-dot.purple-dot.active{background:var(--purple);border-color:var(--purple);color:#fff;box-shadow:0 0 0 4px rgba(123,97,255,0.15)}
+.step-dot.purple-dot.done{background:var(--purple);border-color:var(--purple);color:#fff}
+.step-line{flex:1;height:2px;background:var(--border);transition:background 0.3s;margin:0 4px}
+.step-line.done{background:var(--teal)}
+.step-line.done-purple{background:var(--purple)}
+.step-header{margin-bottom:18px}
+.step-num{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal);margin-bottom:4px}
+.step-num.purple{color:var(--purple)}
+.step-title{font-size:17px;font-weight:700;color:var(--text)}
+.stage-body{flex:1}
+.anim-in{animation:slideUp 0.35s cubic-bezier(0.34,1.56,0.64,1) both}
+@keyframes slideUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+.info-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:10px}
+.ic-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.ic-row:last-child{margin-bottom:0}
+.ic-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;color:var(--text3)}
+.ic-val{font-family:var(--mono);font-size:11px;color:var(--text);text-align:right}
+.ic-val.teal{color:var(--teal)}
+.ic-val.green{color:var(--green)}
+.ic-val.purple{color:var(--purple)}
+.ic-val.amber{color:var(--amber)}
+
+.score-bar-wrap{margin:12px 0}
+.score-bar-label{display:flex;justify-content:space-between;margin-bottom:6px;font-size:11px}
+.score-bar-bg{background:var(--bg);border:1px solid var(--border);border-radius:6px;overflow:hidden;height:8px}
+.score-bar-fill{height:100%;border-radius:6px;transition:width 1s ease}
+.score-bar-fill.teal{background:linear-gradient(90deg,var(--teal),var(--green))}
+.score-bar-fill.purple{background:linear-gradient(90deg,var(--purple),var(--teal))}
+
+.verdict-box{border-radius:10px;padding:16px;margin-bottom:10px;text-align:center}
+.verdict-box.approved{background:rgba(0,201,134,0.06);border:1px solid rgba(0,201,134,0.25)}
+.verdict-box.pending{background:var(--amber-dim);border:1px solid rgba(255,176,32,0.25)}
+.verdict-box.auto{background:var(--purple-dim);border:1px solid var(--purple-border)}
+.verdict-icon{font-size:26px;margin-bottom:6px}
+.verdict-title{font-size:14px;font-weight:700;margin-bottom:3px}
+.verdict-title.green{color:var(--green)}
+.verdict-title.amber{color:var(--amber)}
+.verdict-title.purple{color:var(--purple)}
+.verdict-sub{font-size:11px;opacity:0.7}
+.verdict-sub.green{color:var(--green)}
+.verdict-sub.amber{color:var(--amber)}
+.verdict-sub.purple{color:var(--purple)}
+
+.check-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.check-list li{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text2);opacity:0;transition:opacity 0.3s}
+.check-list li.show{opacity:1}
+.check-list li::before{content:'';width:18px;height:18px;border-radius:50%;flex-shrink:0;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800}
+.check-list li.ok::before{background:var(--teal);content:'✓';color:#07111F;display:flex;align-items:center;justify-content:center}
+.check-list li.ok-purple::before{background:var(--purple);content:'✓';color:#fff;display:flex;align-items:center;justify-content:center}
+.check-list li.pending::before{border:2px solid var(--amber);background:transparent;content:'';animation:spin 0.9s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.code-block{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px 14px;font-family:var(--mono);font-size:11px;color:var(--text2);overflow-x:auto;white-space:pre;line-height:1.65;margin-bottom:10px}
+.code-block .k{color:var(--teal)}
+.code-block .v{color:var(--green)}
+.code-block .s{color:var(--amber)}
+.code-block .n{color:var(--purple)}
+.code-block .r{color:var(--red)}
+
+.tx-box{background:var(--bg);border:1px solid var(--teal-border);border-radius:8px;padding:12px;margin-top:8px}
+.tx-label{font-size:10px;font-weight:600;text-transform:uppercase;color:var(--text3);margin-bottom:4px;letter-spacing:0.07em}
+.tx-hash{font-family:var(--mono);font-size:10px;color:var(--teal);word-break:break-all;margin-bottom:4px}
+.tx-link{font-size:11px;color:var(--teal);opacity:0.6}
+
+.progress-wrap{background:var(--bg);border:1px solid var(--border);border-radius:6px;overflow:hidden;height:6px;margin:10px 0}
+.progress-fill{height:100%;border-radius:6px;width:0%;transition:width 3.5s linear}
+.progress-fill.teal{background:linear-gradient(90deg,var(--teal),var(--green))}
+.progress-fill.purple{background:linear-gradient(90deg,var(--purple),var(--teal))}
+
+.human-action{background:var(--amber-dim);border:1px solid rgba(255,176,32,0.3);border-radius:10px;padding:16px;margin-bottom:10px}
+.ha-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--amber);margin-bottom:8px}
+.ha-msg{font-size:13px;color:var(--text2);margin-bottom:12px;line-height:1.6}
+.ha-btns{display:flex;gap:8px}
+.ha-btn{font-family:var(--sans);font-size:12px;font-weight:700;padding:7px 16px;border-radius:7px;border:none;cursor:pointer;transition:all 0.2s}
+.ha-btn.approve{background:var(--green);color:#fff}
+.ha-btn.approve:hover{background:#00f0a0}
+.ha-btn.deny{background:var(--red-dim);color:var(--red);border:1px solid rgba(255,77,106,0.3)}
+.ha-btn.deny:hover{background:rgba(255,77,106,0.2)}
+
+.step-nav{display:flex;justify-content:space-between;align-items:center}
+.nav-btn{font-family:var(--sans);font-size:12px;font-weight:600;padding:7px 18px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text2);cursor:pointer;transition:all 0.2s}
+.nav-btn:hover:not(:disabled){border-color:var(--teal);color:var(--teal)}
+.nav-btn:disabled{opacity:0.3;cursor:not-allowed}
+.nav-btn.primary{background:var(--teal);border-color:var(--teal);color:#fff}
+.nav-btn.primary:hover:not(:disabled){background:#00f0c4}
+.nav-btn.primary-purple{background:var(--purple);border-color:var(--purple);color:#fff}
+.nav-btn.primary-purple:hover:not(:disabled){background:#9a85ff}
+.nav-btn.restart{background:var(--green);border-color:var(--green);color:#fff}
+.step-counter{font-size:11px;color:var(--text3);font-weight:500}
+
+/* TERMINAL */
+.terminal-panel{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);position:sticky;top:76px}
+.terminal-header{background:var(--bg);border-bottom:1px solid var(--border);padding:10px 16px;display:flex;align-items:center;gap:10px}
+.terminal-dots{display:flex;gap:5px}
+.td{width:10px;height:10px;border-radius:50%}
+.td1{background:#FF5F57}.td2{background:#FEBC2E}.td3{background:#28C840}
+.terminal-title{font-size:11px;font-weight:600;color:var(--text3);font-family:var(--mono);flex:1;text-align:center}
+.terminal-body{padding:14px;min-height:400px;max-height:500px;overflow-y:auto;font-family:var(--mono);font-size:11px;line-height:1.75}
+.log-line{display:flex;opacity:0;transition:opacity 0.2s,transform 0.2s;transform:translateY(3px);margin-bottom:1px}
+.log-line.show{opacity:1;transform:none}
+.log-time{color:var(--text3);flex-shrink:0;margin-right:6px;font-size:10px}
+.log-type{flex-shrink:0;margin-right:8px;font-weight:700;min-width:48px;font-size:10px}
+.log-agent .log-type{color:var(--teal)}
+.log-verun .log-type{color:var(--purple)}
+.log-human .log-type{color:var(--amber)}
+.log-auto .log-type{color:var(--blue)}
+.log-ok .log-type{color:var(--green)}
+.log-tx .log-type{color:var(--teal)}
+.log-warn .log-type{color:var(--amber)}
+.log-msg{color:var(--text2);word-break:break-all;font-size:11px}
+.log-msg.teal{color:var(--teal)}
+.log-msg.green{color:var(--green)}
+.log-msg.purple{color:var(--purple)}
+.log-msg.amber{color:var(--amber)}
+.log-msg.dim{color:var(--text3)}
+
+/* PLATFORM REGISTRY */
+.platform-section{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.platform-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+.platform-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:22px;transition:border-color 0.2s}
+.platform-card:hover{border-color:var(--teal-border)}
+.platform-card.featured{border-color:var(--teal-border);background:var(--card2)}
+.plat-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.plat-name{font-size:15px;font-weight:700;color:var(--text)}
+.plat-score{font-family:var(--mono);font-size:18px;font-weight:700;color:var(--teal)}
+.plat-type{font-size:10px;font-weight:600;padding:2px 8px;border-radius:4px;margin-bottom:10px;display:inline-block;background:var(--teal-dim);color:var(--teal);border:1px solid var(--teal-border)}
+.plat-type.investment{background:var(--purple-dim);color:var(--purple);border-color:var(--purple-border)}
+.plat-type.stablecoin{background:var(--green-dim);color:var(--green);border-color:rgba(0,201,134,0.25)}
+.plat-type.soon{background:var(--border);color:var(--text3);border-color:var(--border)}
+.plat-desc{font-size:12px;color:var(--text2);line-height:1.6;margin-bottom:12px}
+.plat-tags{display:flex;flex-wrap:wrap;gap:6px}
+.plat-tag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:var(--bg2);color:var(--text3);border:1px solid var(--border)}
+
+/* MICA */
+.mica-section{background:var(--bg)}
+.mica-table-wrap{margin-top:40px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.mica-table{width:100%;border-collapse:collapse;font-size:13px}
+.mica-table th{text-align:left;padding:12px 16px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text3);border-bottom:1px solid var(--border);background:var(--bg2)}
+.mica-table td{padding:12px 16px;border-bottom:1px solid var(--border);color:var(--text2)}
+.mica-table tr:last-child td{border-bottom:none}
+.mica-table tr:hover td{background:rgba(0,212,170,0.02)}
+.mica-table td:first-child{font-family:var(--mono);font-size:11px;color:var(--teal);font-weight:600;white-space:nowrap}
+.mica-table td:nth-child(2){color:var(--text);font-weight:500}
+.mica-table .tag{font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;background:var(--teal-dim);color:var(--teal);border:1px solid var(--teal-border)}
+
+/* ARCHITECTURE */
+.arch-section{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.arch-diagram{margin-top:40px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.arch-flow{display:flex;align-items:stretch;overflow-x:auto}
+.arch-node{flex:1;min-width:130px;padding:22px 14px;display:flex;flex-direction:column;align-items:center;text-align:center;border-right:1px solid var(--border)}
+.arch-node:last-child{border-right:none}
+.arch-icon{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:10px;border:1px solid var(--border)}
+.arch-icon.teal{background:var(--teal-dim);border-color:var(--teal-border)}
+.arch-icon.purple{background:var(--purple-dim);border-color:var(--purple-border)}
+.arch-icon.amber{background:var(--amber-dim);border-color:rgba(255,176,32,0.25)}
+.arch-icon.green{background:var(--green-dim);border-color:rgba(0,201,134,0.25)}
+.arch-node h4{font-size:12px;font-weight:700;color:var(--text);margin-bottom:4px}
+.arch-node p{font-size:11px;color:var(--text3);line-height:1.5}
+.arch-node .arch-tag{font-family:var(--mono);font-size:9px;color:var(--text3);margin-top:8px;background:var(--bg2);padding:2px 7px;border-radius:4px;border:1px solid var(--border)}
+.arch-arr{display:flex;align-items:center;padding:0 4px;color:var(--teal);font-size:16px;opacity:0.35;flex-shrink:0}
+
+/* FOOTER */
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:36px 0}
+.footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.footer-brand{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:800;color:var(--text)}
+.footer-brand .tag{font-size:8px;font-weight:800;background:var(--teal);color:#07111F;padding:2px 6px;border-radius:3px}
+.footer-links{display:flex;gap:20px}
+.footer-links a{font-size:12px;color:var(--text3)}
+.footer-links a:hover{color:var(--teal)}
+.footer-note{font-size:11px;color:var(--text3);font-family:var(--mono)}
+
+@media(max-width:900px){
+  .demo-layout,.modes-grid,.platform-grid{grid-template-columns:1fr}
+  .terminal-panel{position:static}
+  .arch-flow{flex-wrap:wrap}
+  .arch-node{min-width:120px;border-bottom:1px solid var(--border)}
+  .hero{padding:70px 0 56px}
+  .section{padding:64px 0}
+  .mode-arrow{display:none}
+}
+@media(max-width:640px){
+  .nav-links{display:none}
+  .hero h1{font-size:32px}
+  .mode-tabs{flex-direction:column;width:100%}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">Verun <span class="tag">NETWORK</span></div>
+  <div class="nav-links">
+    <a href="javascript:void(0)" onclick="scrollToDemo()">Demo</a>
+    <a href="#platforms">Platforms</a>
+    <a href="/docs.html" target="_blank">Tech Docs</a>
+  </div>
+  <div class="nav-right">
+    <div class="solana-badge">
+      <span class="solana-dot"></span>
+      Solana Devnet
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <h1>The Trust Layer<br>for Agentic Finance.</h1>
+        <p class="hero-sub">Make your AI agent <strong>regulatory-ready</strong>.</p>
+        <div class="hero-btns">
+          <button class="btn btn-teal" onclick="scrollToDemo()">Run Demo →</button>
+          <a href="/docs.html" target="_blank" class="btn btn-outline">View Docs</a>
+        </div>
+      </div>
+      <!-- Phone mockup -->
+      <div class="phone-wrap">
+        <div class="phone">
+          <div class="phone-notch">
+            <span class="phone-notch-speaker"></span>
+            <span class="phone-notch-cam"></span>
+          </div>
+          <div class="phone-screen">
+            <div class="phone-status">
+              <span>9:41</span>
+              <div class="phone-status-icons">▋▋▋ WiFi ▮</div>
+            </div>
+            <div class="trustmark-inner">
+              <div class="tm-label">Verun Trustmark</div>
+              <div class="tm-shield">
+                <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M16 3L5 7.5V16C5 21.8 9.9 27.3 16 29C22.1 27.3 27 21.8 27 16V7.5L16 3Z" fill="#16a34a" opacity="0.15"/>
+                  <path d="M16 3L5 7.5V16C5 21.8 9.9 27.3 16 29C22.1 27.3 27 21.8 27 16V7.5L16 3Z" stroke="#16a34a" stroke-width="1.5" stroke-linejoin="round"/>
+                  <path d="M11 16L14.5 19.5L21 13" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="tm-score">
+                <span class="tm-score-num">820</span><span class="tm-score-max"> / 1000</span>
+              </div>
+              <div class="tm-verified">✓ &nbsp;VERIFIED</div>
+              <div class="tm-validators">
+                <div class="tm-val"><span class="tm-val-name">TKF</span><span class="tm-val-check">✓</span></div>
+                <div class="tm-val"><span class="tm-val-name">BCP</span><span class="tm-val-check">✓</span></div>
+                <div class="tm-val"><span class="tm-val-name">TST</span><span class="tm-val-check">✓</span></div>
+              </div>
+              <div class="tm-footer"><span class="tm-footer-logo">VERUN · SOLANA</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 MODES -->
+<section class="section modes-section" id="how">
+  <div class="container">
+    <div class="section-label">How it works</div>
+    <h2 class="section-h2">Three modes. One protocol.</h2>
+    <div class="modes-grid">
+      <div class="mode-card" style="background:var(--card)">
+        <div class="mode-num">01 · DISCOVERY</div>
+        <div class="mode-icon">🔍</div>
+        <div class="mode-title">Agent finds the platform</div>
+        <div class="mode-desc">Agent scans verified platforms. Verun scores each — trust, compliance, fees. Agent selects the best match.</div>
+        <span class="mode-tag teal">Automated</span>
+        <div class="mode-arrow">→</div>
+      </div>
+      <div class="mode-card" style="background:var(--card)">
+        <div class="mode-num">02 · SUPERVISED</div>
+        <div class="mode-icon">👤</div>
+        <div class="mode-title">Human reviews and approves</div>
+        <div class="mode-desc">Agent sends a structured referral — platform score, risk tier, proposed action. Human approves or denies with one click.</div>
+        <span class="mode-tag amber">Human Gate</span>
+        <div class="mode-arrow">→</div>
+      </div>
+      <div class="mode-card" style="background:var(--card)">
+        <div class="mode-num">03 · AUTONOMOUS</div>
+        <div class="mode-icon">⚡</div>
+        <div class="mode-title">Agent runs fully automated</div>
+        <div class="mode-desc">Human approves once. Agent executes autonomously within policy bounds — invest, transfer, rebalance. Every action anchored on Solana. Revokable anytime.</div>
+        <span class="mode-tag purple">Verun-Powered</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO -->
+<section class="section demo-section" id="demo">
+  <div class="container">
+    <div style="text-align:center">
+      <div class="section-label">Interactive Demo</div>
+      <h2 class="section-h2" style="margin-bottom:8px">Test how your agent is scoring.</h2>
+    </div>
+
+    <div class="mode-tabs">
+      <button class="mode-tab" id="tab-discover" onclick="setMode('discover')">🔍 Discovery</button>
+      <button class="mode-tab active" id="tab-supervised" onclick="setMode('supervised')">👤 Supervised</button>
+      <button class="mode-tab auto-tab" id="tab-auto" onclick="setMode('auto')">⚡ Autonomous</button>
+    </div>
+
+    <div class="demo-layout">
+      <div class="step-panel" id="step-panel">
+        <div class="step-nav" style="margin-bottom:20px;padding-bottom:18px;border-bottom:1px solid var(--border);border-top:none;margin-top:0;padding-top:0">
+          <button class="nav-btn" id="btn-prev" onclick="prevStep()" disabled>← Back</button>
+          <span class="step-counter" id="step-counter"></span>
+          <button class="nav-btn primary" id="btn-next" onclick="nextStep()">Next →</button>
+        </div>
+        <div class="step-dots" id="step-dots"></div>
+        <div id="stage-body" class="stage-body"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AGENT QUICKSTART -->
+<section class="section" id="quickstart" style="background:var(--bg)">
+  <div class="container">
+    <div class="section-label">Agent Quickstart</div>
+    <h2 class="section-h2">Level up your agent trust.</h2>
+    <p class="section-sub" style="margin-bottom:32px">Paste this into your agent's system instructions. It connects any AI agent to the Verun Network in under 60 seconds.</p>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;max-width:780px">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 18px;border-bottom:1px solid var(--border);background:var(--card)">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="width:10px;height:10px;border-radius:50%;background:#FF5F57;display:inline-block"></span>
+          <span style="width:10px;height:10px;border-radius:50%;background:#FEBC2E;display:inline-block"></span>
+          <span style="width:10px;height:10px;border-radius:50%;background:#28C840;display:inline-block"></span>
+          <span style="font-family:var(--mono);font-size:11px;color:var(--text3);margin-left:6px">verun · agent system prompt</span>
+        </div>
+        <button onclick="copyAgentPrompt()" id="copy-btn" style="font-family:var(--sans);font-size:11px;font-weight:700;padding:5px 14px;border-radius:6px;border:1px solid var(--teal-border);background:var(--teal-dim);color:var(--teal);cursor:pointer;transition:all .15s">Copy Prompt</button>
+      </div>
+      <pre id="agent-prompt-text" style="margin:0;padding:20px 22px;font-family:var(--mono);font-size:12px;line-height:1.75;color:var(--text2);white-space:pre-wrap;word-break:break-word;overflow-x:auto">You are an AI agent operating within the Verun Network trust framework on Solana.
+
+Before executing any financial operation, request a Verun trust evaluation.
+
+== HOW TO EVALUATE ==
+POST https://verun-solana-mvp.vercel.app/api/evaluate
+Body: { "agentId": "YOUR_AGENT_ID", "score": YOUR_SCORE, "operation": "transfer" }
+
+== OPERATION GATES ==
+read        → score 300+
+transfer    → score 500+
+order       → score 600+
+
+== VERDICT RULES ==
+permitted: true   → proceed with the operation
+permitted: false  → stop, escalate to human supervisor
+Always store the returned txid as your on-chain audit trail.
+
+== HUMAN ESCALATION ==
+If verdict is denied or pending, notify the human supervisor.
+Never execute financial operations without a valid Verun verdict.
+
+Network: Solana Devnet
+Validators: tokenforge · BCP Partners
+Docs: https://verun-solana-mvp.vercel.app/docs.html</pre>
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORM REGISTRY -->
+<section class="section platform-section" id="platforms">
+  <div class="container">
+    <div class="section-label">Validator Network</div>
+    <h2 class="section-h2">Regulated institutions validate your agent.</h2>
+    <p class="section-sub">Two founding validators + one open slot for institutional partners.</p>
+    <div class="platform-grid">
+      <div class="platform-card featured">
+        <div style="margin-bottom:16px">
+          <span class="plat-tag" style="background:var(--amber-dim);color:var(--amber);border-color:rgba(217,119,6,0.25);font-size:10px;font-weight:700;letter-spacing:0.1em">FOUNDING VALIDATOR</span>
+        </div>
+        <div class="plat-name" style="font-size:18px;margin-bottom:12px">tokenforge</div>
+        <div class="plat-desc">White-label Security Token platform (TokenSuite).</div>
+        <div class="plat-tags">
+          <span class="plat-tag">eWpG</span>
+          <span class="plat-tag">BaFin</span>
+          <span class="plat-tag">MiFID II</span>
+          <span class="plat-tag">Genesis</span>
+        </div>
+      </div>
+      <div class="platform-card">
+        <div style="margin-bottom:16px">
+          <span class="plat-tag" style="background:var(--amber-dim);color:var(--amber);border-color:rgba(217,119,6,0.25);font-size:10px;font-weight:700;letter-spacing:0.1em">FOUNDING VALIDATOR</span>
+        </div>
+        <div class="plat-name" style="font-size:18px;margin-bottom:12px">BCP Partners</div>
+        <div class="plat-desc">Investment firm. Berlin-based German GmbH.</div>
+        <div class="plat-tags">
+          <span class="plat-tag">Genesis</span>
+          <span class="plat-tag">EU Regulated</span>
+          <span class="plat-tag">Advisory</span>
+          <span class="plat-tag">Berlin GmbH</span>
+        </div>
+      </div>
+      <div class="platform-card">
+        <div style="margin-bottom:16px">
+          <a href="https://www.bcpp.io/contact-us" target="_blank" style="display:inline-block;padding:4px 12px;background:transparent;color:var(--teal);border:1px solid var(--teal-border);border-radius:20px;font-size:10px;font-weight:700;letter-spacing:0.1em;text-decoration:none;">APPLY →</a>
+        </div>
+        <div class="plat-name" style="font-size:18px;margin-bottom:12px"><strong>Open Slot</strong></div>
+        <div class="plat-desc"></div>
+        <div class="plat-tags">
+          <span class="plat-tag">Bank</span>
+          <span class="plat-tag">Broker</span>
+          <span class="plat-tag">Neobank</span>
+          <span class="plat-tag">Exchange</span>
+          <span class="plat-tag">...</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- REGULATORY ANCHORS -->
+<section class="section" style="background:var(--bg2);border-top:1px solid var(--border)">
+  <div class="container">
+    <div class="section-label">EU Regulatory Anchors</div>
+    <h2 class="section-h2">Primary regulatory anchors.</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:40px">
+      <div class="platform-card" style="border-left:3px solid var(--purple)">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px">
+          <div class="plat-name" style="font-size:17px">EU AI Act</div>
+          <span style="font-family:var(--mono);font-size:10px;font-weight:600;padding:3px 10px;border-radius:6px;background:var(--purple-dim);color:var(--purple);border:1px solid var(--purple-border);white-space:nowrap">Reg. 2024/1689</span>
+        </div>
+        <p style="font-size:13px;color:var(--text);margin-bottom:8px;line-height:1.65">Risk classification, transparency (Art. 12), human oversight (Art. 14).</p>
+        <p style="font-size:12px;color:var(--text3);line-height:1.6">Primary frame for autonomous agents in high-risk domains.</p>
+      </div>
+      <div class="platform-card" style="border-left:3px solid var(--teal)">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px">
+          <div class="plat-name" style="font-size:17px">MiFID II</div>
+          <span style="font-family:var(--mono);font-size:10px;font-weight:600;padding:3px 10px;border-radius:6px;background:var(--teal-dim);color:var(--teal);border:1px solid var(--teal-border);white-space:nowrap">Art. 17 · RTS 6</span>
+        </div>
+        <p style="font-size:13px;color:var(--text);margin-bottom:8px;line-height:1.65">Algorithmic trading safeguards, kill-switch, pre-trade controls.</p>
+        <p style="font-size:12px;color:var(--text3);line-height:1.6">Applies when agents route orders for regulated instruments.</p>
+      </div>
+    </div>
+    <div style="margin-top:16px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px 22px;display:flex;align-items:flex-start;gap:16px">
+      <span style="font-size:9px;font-weight:700;letter-spacing:0.12em;padding:4px 10px;border-radius:5px;border:1px solid var(--border);color:var(--text3);white-space:nowrap;margin-top:1px">DISCLOSURE</span>
+      <p style="font-size:13px;color:var(--text2);line-height:1.65">This page reflects the team's design intent. Independent legal review is planned. Nothing here constitutes certified compliance or legal advice.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand">Verun <span class="tag">NETWORK</span></div>
+        <div style="font-size:11px;color:var(--text3);margin-top:4px;font-family:var(--mono)">© 2026 BCP Partners GmbH · All rights reserved</div>
+      </div>
+      <div class="footer-links">
+        <a href="javascript:void(0)" onclick="scrollToDemo()">Demo</a>
+        <a href="#platforms">Platforms</a>
+        <a href="https://github.com/Fahad00674/verun-solana-mvp" target="_blank">GitHub</a>
+        <a href="/docs.html" target="_blank">Tech Docs</a>
+        <a href="https://www.bcpp.io/contact-us" target="_blank">Contact</a>
+      </div>
+      <div class="footer-note">Solana Devnet · v0.1.0</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ─── STATE ──────────────────────────────────────────────
+let currentMode = 'supervised';
+let currentStep = 1;
+let logTimer = null;
+let lastLiveEvaluation = null;
+
+const LIVE_DEMO_PAYLOAD = {
+  agentId: 'agt_demo',
+  score: 820,
+  operation: 'transfer',
+  validatorIds: ['val-bcp-01','val-tokenforge-02','val-test-03']
+};
+
+const MODES = {
+  discover: {
+    steps: 3,
+    title: 'verun · discovery log',
+    color: 'teal',
+    labels: ['Platform Scan', 'Verun Validation', 'Agent Referral']
+  },
+  supervised: {
+    steps: 3,
+    title: 'verun · supervised log',
+    color: 'teal',
+    labels: ['Referral Received', 'Human Review', 'Decision Anchored']
+  },
+  auto: {
+    steps: 3,
+    title: 'verun · autonomous log',
+    color: 'purple',
+    labels: ['Policy Loaded', 'Auto Execute', 'On-Chain Proof']
+  }
+};
+
+// ─── ANCHOR TX BOX ──────────────────────────────────────
+// Renders a clickable on-chain anchor box. If no live evaluation has come back
+// yet, shows a loading state instead of a fake hash + misleading "unavailable".
+function anchorBoxHTML(label) {
+  const tx = lastLiveEvaluation?.anchor?.txid;
+  const explorer = lastLiveEvaluation?.anchor?.explorer
+    || (tx ? `https://explorer.solana.com/tx/${tx}?cluster=devnet` : null);
+  if (tx && explorer) {
+    return `<div class="tx-box">
+      <div class="tx-label">${label}</div>
+      <div class="tx-hash"><a href="${explorer}" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px dashed currentColor">${tx}</a></div>
+      <div class="tx-link"><a href="${explorer}" target="_blank" rel="noopener">↗ View on Solana Explorer Devnet</a></div>
+    </div>`;
+  }
+  return `<div class="tx-box" style="opacity:0.85">
+    <div class="tx-label">${label}</div>
+    <div class="tx-hash" style="display:flex;align-items:center;gap:8px">
+      <span style="display:inline-block;width:12px;height:12px;border:2px solid var(--teal-border);border-top-color:var(--teal);border-radius:50%;animation:spin 0.8s linear infinite"></span>
+      <span>Anchoring on Solana devnet…</span>
+    </div>
+    <div class="tx-link">Live <code>/api/evaluate</code> call in flight</div>
+  </div>`;
+}
+
+// ─── LOG ────────────────────────────────────────────────
+function now() { return new Date().toTimeString().substr(0,8); }
+function addLog(type, typeLabel, msg, cls='') {
+  // Terminal panel was removed from layout — log to console instead so the JS doesn't throw.
+  const body = document.getElementById('terminal-body');
+  if (!body) { try { console.debug(`[${typeLabel}]`, msg); } catch (_) {} return; }
+  const line = document.createElement('div');
+  line.className = `log-line log-${type}`;
+  line.innerHTML = `<span class="log-time">${now()}</span><span class="log-type">${typeLabel}</span><span class="log-msg ${cls}">${msg}</span>`;
+  body.appendChild(line);
+  setTimeout(()=>line.classList.add('show'), 20);
+  body.scrollTop = body.scrollHeight;
+}
+function queueLogs(logs) {
+  clearInterval(logTimer);
+  let i = 0;
+  logTimer = setInterval(() => {
+    if(i >= logs.length) { clearInterval(logTimer); return; }
+    addLog(...logs[i++]);
+  }, 320);
+}
+
+// ─── DOTS ───────────────────────────────────────────────
+function renderDots() {
+  const m = MODES[currentMode];
+  const container = document.getElementById('step-dots');
+  container.innerHTML = '';
+  for(let i=1;i<=m.steps;i++){
+    const wrap = document.createElement('div');
+    wrap.className = 'step-dot-wrap';
+    if(i===m.steps) wrap.style.flex='0';
+    const dot = document.createElement('div');
+    dot.className = 'step-dot' + (m.color==='purple'?' purple-dot':'');
+    if(i < currentStep) dot.classList.add('done');
+    if(i === currentStep) dot.classList.add('active');
+    dot.textContent = i;
+    dot.onclick = (()=>{const n=i;return()=>{if(n<currentStep){currentStep=n;renderStep();}}})();
+    wrap.appendChild(dot);
+    if(i < m.steps){
+      const line = document.createElement('div');
+      line.className = 'step-line' + (i < currentStep ? (m.color==='purple'?' done-purple':' done') : '');
+      wrap.appendChild(line);
+    }
+    container.appendChild(wrap);
+  }
+  document.getElementById('step-counter').textContent = `Step ${currentStep} of ${m.steps}`;
+  document.getElementById('btn-prev').disabled = currentStep === 1;
+  const nextBtn = document.getElementById('btn-next');
+  if(currentStep === m.steps){
+    nextBtn.textContent = 'Restart ↺';
+    nextBtn.className = 'nav-btn restart';
+    nextBtn.onclick = () => { currentStep=1; renderStep(); };
+  } else {
+    nextBtn.textContent = 'Next →';
+    nextBtn.className = m.color==='purple' ? 'nav-btn primary-purple' : 'nav-btn primary';
+    nextBtn.onclick = nextStep;
+  }
+}
+
+function prevStep(){ if(currentStep>1){currentStep--;renderStep();} }
+function nextStep(){ const m=MODES[currentMode]; if(currentStep<m.steps){currentStep++;renderStep();} }
+
+// ─── MODE SWITCH ────────────────────────────────────────
+let liveDemoPromise = null;
+function setMode(mode) {
+  currentMode = mode;
+  currentStep = 1;
+  ['discover','supervised','auto'].forEach(k=>{
+    const t = document.getElementById('tab-'+k);
+    if (t) t.classList.remove('active');
+  });
+  const activeTab = document.getElementById('tab-'+mode);
+  if (activeTab) activeTab.classList.add('active');
+  const tt = document.getElementById('terminal-title'); if (tt) tt.textContent = MODES[mode].title;
+  const tb = document.getElementById('terminal-body'); if (tb) tb.innerHTML = '';
+  renderStep();
+  addLog('agent','AGENT',`Mode: ${mode.toUpperCase()}`, mode==='auto'?'purple':'teal');
+  // Kick off (or reuse) a live /api/evaluate call so step 3 can render the real testnet TXID.
+  if (!liveDemoPromise) liveDemoPromise = runLiveDemo().catch(()=>{}).finally(()=>{ liveDemoPromise = null; });
+}
+
+function copyAgentPrompt() {
+  const text = document.getElementById('agent-prompt-text').innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copy-btn');
+    btn.textContent = '✓ Copied!';
+    btn.style.background = 'var(--teal)';
+    btn.style.color = '#fff';
+    setTimeout(() => {
+      btn.textContent = 'Copy Prompt';
+      btn.style.background = 'var(--teal-dim)';
+      btn.style.color = 'var(--teal)';
+    }, 2000);
+  });
+}
+
+function scrollToDemo() {
+  const panel = document.getElementById('step-panel');
+  if (!panel) return;
+  const navH = document.querySelector('.nav')?.offsetHeight || 62;
+  const top = panel.getBoundingClientRect().top + window.scrollY - navH - 12;
+  window.scrollTo({ top, behavior: 'smooth' });
+}
+
+async function runLiveDemo() {
+  addLog('agent','AGENT','Running live evaluate call...','teal');
+  addLog('verun','VERUN',`payload: ${JSON.stringify(LIVE_DEMO_PAYLOAD)}`,'dim');
+
+  try {
+    const res = await fetch('/api/evaluate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(LIVE_DEMO_PAYLOAD)
+    });
+    const data = await res.json();
+    const verdict = data?.verdict || {};
+    const anchor = data?.anchor || {};
+    const tx = anchor?.txid || null;
+    lastLiveEvaluation = { verdict, anchor };
+
+    addLog('ok','OK',`consensus: ${verdict.consensus || 'n/a'} · permitted: ${String(verdict.permitted)}`,'green');
+    if (tx) {
+      addLog('tx','TX',`anchor txid: ${tx}`,'teal');
+      addLog('tx','TX',anchor.explorer || `https://explorer.solana.com/tx/${tx}?cluster=devnet`,'dim');
+    } else {
+      addLog('warn','WARN',`anchor: ${anchor.status || 'unavailable'} ${anchor.error ? `(${anchor.error})` : ''}`,'amber');
+    }
+
+    // Re-render whatever step the user is currently on so the TX hash + explorer link populate live.
+    renderStep();
+  } catch (e) {
+    addLog('warn','WARN',`live call failed: ${e.message}`,'amber');
+  }
+}
+
+// ─── STEP RENDERERS ─────────────────────────────────────
+function renderStep() {
+  renderDots();
+  const body = document.getElementById('stage-body');
+  body.innerHTML = '';
+  if(currentMode === 'discover') renderDiscover(body);
+  else if(currentMode === 'supervised') renderSupervised(body);
+  else renderAuto(body);
+}
+
+function renderDiscover(body) {
+  const step = currentStep;
+  if(step===1) {
+    body.innerHTML = `<div class="anim-in">
+      <div class="step-header">
+        <div class="step-num">Step 1 · Platform Scan</div>
+        <div class="step-title">Agent scans platform registry</div>
+      </div>
+      <div class="info-card">
+        <div class="ic-row"><span class="ic-label">Agent</span><span class="ic-val teal">agt_aurora_3f9a</span></div>
+        <div class="ic-row"><span class="ic-label">Intent</span><span class="ic-val">Security Token Investment</span></div>
+        <div class="ic-row"><span class="ic-label">Budget</span><span class="ic-val">€ 5,000 EURC</span></div>
+        <div class="ic-row"><span class="ic-label">Region</span><span class="ic-val">EU · MiCA Jurisdiction</span></div>
+      </div>
+      <ul class="check-list" id="cl1">
+        <li id="c1-1">Scanning investment platforms...</li>
+        <li id="c1-2">Filtering: potential MiCA features · pre-audit</li>
+        <li id="c1-3">Match found: tokenforge (Score 920)</li>
+      </ul>
+    </div>`;
+    [100,500,900].forEach((t,i)=>{
+      setTimeout(()=>{
+        const el=document.getElementById(`c1-${i+1}`);
+        if(el){el.classList.add('show');setTimeout(()=>el.classList.add('ok'),200);}
+      },t);
+    });
+    queueLogs([
+      ['agent','AGENT','agt_aurora_3f9a initialised','teal'],
+      ['agent','AGENT','intent: Security Token Investment · €5,000','dim'],
+      ['verun','VERUN','scanning platform registry...','purple'],
+      ['verun','VERUN','filter: potential MiCA feature · EU jurisdiction','dim'],
+      ['ok','MATCH','tokenforge → score: 920 · VERIFIED','green'],
+    ]);
+  }
+  if(step===2) {
+    body.innerHTML = `<div class="anim-in">
+      <div class="step-header">
+        <div class="step-num">Step 2 · Verun Validation</div>
+        <div class="step-title">tokenforge platform validated</div>
+      </div>
+      <div class="info-card">
+        <div class="ic-row"><span class="ic-label">Platform</span><span class="ic-val teal">tokenforge</span></div>
+        <div class="ic-row"><span class="ic-label">Trust Score</span><span class="ic-val" style="color:var(--teal);font-size:17px;font-weight:700">920 / 1000</span></div>
+        <div class="ic-row"><span class="ic-label">Type</span><span class="ic-val">Security Token · Investment</span></div>
+        <div class="ic-row"><span class="ic-label">Compliance</span><span class="ic-val green">eWpG · BaFin · MiFID II</span></div>
+      </div>
+      <div class="score-bar-wrap">
+        <div class="score-bar-label"><span style="font-size:11px;color:var(--text3)">Platform Trust</span><span style="font-size:11px;color:var(--teal)">920</span></div>
+        <div class="score-bar-bg"><div class="score-bar-fill teal" id="bar1" style="width:0%"></div></div>
+      </div>
+      <div class="code-block"><span class="k">"platform"</span>: <span class="s">"tokenforge"</span>,
+<span class="k">"score"</span>:     <span class="v">920</span>,
+<span class="k">"tier"</span>:      <span class="v">"VERIFIED"</span>,
+<span class="k">"validator_consensus"</span>: <span class="v">3</span>/<span class="v">3</span>,
+<span class="k">"mica"</span>:      <span class="s">"Art.68 · Art.72 · Art.75"</span></div>
+    </div>`;
+    setTimeout(()=>{ const b=document.getElementById('bar1'); if(b) b.style.width='92%'; },200);
+    queueLogs([
+      ['verun','VERUN','validating tokenforge...','purple'],
+      ['verun','VERUN','Val-EU-01 → VERIFIED (eWpG confirmed)','dim'],
+      ['verun','VERUN','Val-Neutral-02 → VERIFIED (AML clear)','dim'],
+      ['verun','VERUN','Val-tokenforge → VERIFIED (self-attested)','dim'],
+      ['ok','OK','consensus 3/3 · score: 920 · potential MiCA feature','green'],
+    ]);
+  }
+  if(step===3) {
+    const consensus = lastLiveEvaluation?.verdict?.consensus || 'LOW';
+    const permitted = (lastLiveEvaluation?.verdict?.permitted ?? true);
+    body.innerHTML = `<div class="anim-in">
+      <div class="step-header">
+        <div class="step-num">Step 3 · Agent Referral</div>
+        <div class="step-title">Agent refers tokenforge to human</div>
+      </div>
+      <div class="verdict-box approved">
+        <div class="verdict-icon">📨</div>
+        <div class="verdict-title green">Referral sent to human</div>
+        <div class="verdict-sub green">consensus ${consensus} · permitted ${String(permitted)}</div>
+      </div>
+      <div class="code-block"><span class="k">"to"</span>:       <span class="s">"human_rafael"</span>,
+<span class="k">"from"</span>:     <span class="s">"agt_aurora_3f9a"</span>,
+<span class="k">"platform"</span>: <span class="s">"tokenforge"</span>,
+<span class="k">"action"</span>:   <span class="s">"invest €5,000 EURC"</span>,
+<span class="k">"score"</span>:    <span class="v">${lastLiveEvaluation?.verdict?.score ?? 920}</span>,
+<span class="k">"consensus"</span>:<span class="v">"${consensus}"</span>,
+<span class="k">"status"</span>:   <span class="s">"awaiting_approval"</span></div>
+      ${anchorBoxHTML('Solana Anchor · Referral TX')}
+      <div class="progress-wrap"><div class="progress-fill teal" id="prog3"></div></div>
+    </div>`;
+    setTimeout(()=>{const p=document.getElementById('prog3');if(p)p.style.width='100%';},100);
+    const liveTxid = lastLiveEvaluation?.anchor?.txid;
+    queueLogs([
+      ['agent','AGENT','preparing referral for human_rafael...','teal'],
+      ['agent','AGENT',`live verdict: ${consensus} · permitted ${String(permitted)}`,'dim'],
+      ['tx','TX','anchoring referral on Solana...','teal'],
+      ['tx','TX', liveTxid ? `txID: ${liveTxid}` : 'fetching live txid...', 'dim'],
+      ['ok','OK','referral anchored · awaiting human approval','green'],
+    ]);
+  }
+}
+
+function renderSupervised(body) {
+  const step = currentStep;
+  if(step===1) {
+    body.innerHTML = `<div class="anim-in">
+      <div class="step-header">
+        <div class="step-num">Step 1 · Referral Received</div>
+        <div class="step-title">Human receives agent recommendation</div>
+      </div>
+      <div class="human-action">
+        <div class="ha-label">👤 Human Dashboard · Notification</div>
+        <div class="ha-msg">Your agent <strong>agt_aurora_3f9a</strong> recommends investing <strong>€5,000 EURC</strong> via <strong>tokenforge</strong>.<br><br>Platform Trust Score: <strong style="color:var(--teal)">920/1000</strong> · potential MiCA feature · eWpG verified.</div>
+      </div>
+      <div class="info-card">
+        <div class="ic-row"><span class="ic-label">Platform</span><span class="ic-val teal">tokenforge · tokenforge.io</span></div>
+        <div class="ic-row"><span class="ic-label">Action</span><span class="ic-val">Invest €5,000 EURC</span></div>
+        <div class="ic-row"><span class="ic-label">Risk Tier</span><span class="ic-val green">LOW (Score 920)</span></div>
+        <div class="ic-row"><span class="ic-label">Verun Verdict</span><span class="ic-val green">VERIFIED · 3/3 Validators</span></div>
+      </div>
+    </div>`;
+    queueLogs([
+      ['human','HUMAN','referral received from agt_aurora_3f9a','amber'],
+      ['human','HUMAN','platform: tokenforge · action: invest €5k','dim'],
+      ['verun','VERUN','verun verdict attached: VERIFIED (920)','purple'],
+      ['human','HUMAN','awaiting human decision...','amber'],
+    ]);
+  }
+  if(step===2) {
+    body.innerHTML = `<div class="anim-in">
+      <div class="step-header">
+        <div class="step-num">Step 2 · Human Review</div>
+        <div class="step-title">Human approves or denies</div>
+      </div>
+      <div class="human-action">
+        <div class="ha-label">👤 Your Decision</div>
+        <div class="ha-msg">Approve this one-time transaction — or grant <strong>Autonomous Mode</strong> to let the agent execute future tokenforge investments automatically within your policy.</div>
+        <div class="ha-btns">
+          <button class="ha-btn approve" onclick="humanApprove(false)">✓ Approve Once</button>
+          <button class="ha-btn approve" style="background:var(--purple);color:#fff" onclick="humanApprove(true)">⚡ Grant Auto Mode</button>
+          <button class="ha-btn deny" onclick="humanDeny()">✗ Deny</button>
+        </div>
+      </div>
+      <div id="decision-result"></div>
+    </div>`;
+    queueLogs([
+      ['human','HUMAN','reviewing recommendation...','amber'],
+      ['verun','VERUN','options: approve once · grant auto mode · deny','purple'],
+    ]);
+  }
+  if(step===3) {
+    body.innerHTML = `<div class="anim-in">
+      <div class="step-header">
+        <div class="step-num">Step 3 · Decision Anchored</div>
+        <div class="step-title">Approval recorded on Solana</div>
+      </div>
+      <div class="verdict-box approved">
+        <div class="verdict-icon">✅</div>
+        <div class="verdict-title green">Transaction Executed · Approved</div>
+        <div class="verdict-sub green">€5,000 EURC → tokenforge · anchored on-chain</div>
+      </div>
+      ${anchorBoxHTML('Solana Anchor · Approval TX')}
+      <div class="progress-wrap"><div class="progress-fill teal" id="prog-s3"></div></div>
+    </div>`;
+    setTimeout(()=>{const p=document.getElementById('prog-s3');if(p)p.style.width='100%';},100);
+    queueLogs([
+      ['human','HUMAN','approved: invest €5,000 EURC on tokenforge','amber'],
+      ['tx','TX','anchoring approval on Solana...','teal'],
+      ['ok','OK','approval anchored · ~3.6s','green'],
+      ['ok','OK','transaction executed · potential MiCA feature audit trail written','green'],
+    ]);
+  }
+}
+
+function humanApprove(autoMode) {
+  const r = document.getElementById('decision-result');
+  if(!r) return;
+  if(autoMode) {
+    r.innerHTML = `<div class="verdict-box auto"><div class="verdict-icon">⚡</div><div class="verdict-title purple">Autonomous Mode Granted</div><div class="verdict-sub purple">Agent can now execute tokenforge investments automatically within policy</div></div>`;
+    addLog('human','HUMAN','granted: AUTONOMOUS MODE for tokenforge','amber');
+    addLog('verun','VERUN','policy stored on Solana · agent unlocked','purple');
+  } else {
+    r.innerHTML = `<div class="verdict-box approved"><div class="verdict-icon">✅</div><div class="verdict-title green">One-time Approval Granted</div><div class="verdict-sub green">Executing: €5,000 EURC → tokenforge</div></div>`;
+    addLog('human','HUMAN','approved: one-time transaction','amber');
+  }
+}
+function humanDeny() {
+  const r = document.getElementById('decision-result');
+  if(!r) return;
+  r.innerHTML = `<div style="background:var(--red-dim);border:1px solid rgba(255,77,106,0.25);border-radius:10px;padding:14px;text-align:center"><div style="font-size:22px;margin-bottom:6px">🚫</div><div style="font-size:13px;font-weight:700;color:var(--red)">Transaction Denied</div></div>`;
+  addLog('human','HUMAN','denied: transaction blocked by human','amber');
+  addLog('verun','VERUN','denial anchored on Solana','purple');
+}
+
+function renderAuto(body) {
+  const step = currentStep;
+  if(step===1) {
+    body.innerHTML = `<div class="anim-in">
+      <div class="step-header">
+        <div class="step-num" style="color:var(--purple)">Step 1 · Policy Loaded</div>
+        <div class="step-title">Autonomous mode active</div>
+      </div>
+      <div class="verdict-box auto">
+        <div class="verdict-icon">⚡</div>
+        <div class="verdict-title purple">Autonomous Mode Active</div>
+        <div class="verdict-sub purple">Human pre-approved · policy enforced by Verun</div>
+      </div>
+      <div class="info-card">
+        <div class="ic-row"><span class="ic-label">Agent</span><span class="ic-val purple">agt_aurora_3f9a</span></div>
+        <div class="ic-row"><span class="ic-label">Platform</span><span class="ic-val teal">tokenforge</span></div>
+        <div class="ic-row"><span class="ic-label">Max per TX</span><span class="ic-val">€ 10,000 EURC</span></div>
+        <div class="ic-row"><span class="ic-label">Revokable</span><span class="ic-val green">Yes · anytime</span></div>
+      </div>
+    </div>`;
+    queueLogs([
+      ['auto','AUTO','autonomous mode loaded','purple'],
+      ['auto','AUTO','policy: tokenforge · max €10,000/tx · EURC','dim'],
+      ['verun','VERUN','policy anchor confirmed on Solana','purple'],
+      ['auto','AUTO','agent agt_aurora_3f9a ready to execute','teal'],
+    ]);
+  }
+  if(step===2) {
+    body.innerHTML = `<div class="anim-in">
+      <div class="step-header">
+        <div class="step-num" style="color:var(--purple)">Step 2 · Auto Execute</div>
+        <div class="step-title">Agent executes without human input</div>
+      </div>
+      <ul class="check-list" id="cl-auto">
+        <li id="ca-1">Policy check: tokenforge · €3,200 EURC ✓</li>
+        <li id="ca-2">Verun score re-validated: 920 (cached 4h)</li>
+        <li id="ca-3">x402 micro-fee paid · access granted</li>
+        <li id="ca-4">Transaction initiated on tokenforge Chain API</li>
+        <li id="ca-5">Settlement: EURC → tokenforge wallet</li>
+      </ul>
+    </div>`;
+    [0,350,700,1050,1400].forEach((t,i)=>{
+      setTimeout(()=>{
+        const el=document.getElementById(`ca-${i+1}`);
+        if(el){el.classList.add('show');setTimeout(()=>el.classList.add('ok-purple'),200);}
+      },t);
+    });
+    queueLogs([
+      ['auto','AUTO','executing: invest €3,200 EURC on tokenforge','purple'],
+      ['verun','VERUN','policy check: within bounds','dim'],
+      ['verun','VERUN','score cache: 920 · valid 4h · skip re-eval','dim'],
+      ['auto','AUTO','x402 fee paid · tokenforge API called','teal'],
+      ['ok','OK','transaction initiated · no human required','green'],
+    ]);
+  }
+  if(step===3) {
+    body.innerHTML = `<div class="anim-in">
+      <div class="step-header">
+        <div class="step-num" style="color:var(--purple)">Step 3 · On-Chain Proof</div>
+        <div class="step-title">Execution anchored · human can review</div>
+      </div>
+      <div class="verdict-box auto">
+        <div class="verdict-icon">⛓️</div>
+        <div class="verdict-title purple">Autonomous TX Complete</div>
+        <div class="verdict-sub purple">Anchored on Solana · human notified</div>
+      </div>
+      ${anchorBoxHTML('Solana Anchor · Auto Execution TX')}
+      <div class="info-card" style="margin-top:10px">
+        <div class="ic-row"><span class="ic-label">Human notified</span><span class="ic-val green">Yes · push notification</span></div>
+        <div class="ic-row"><span class="ic-label">Revoke anytime</span><span class="ic-val amber">Yes · single action</span></div>
+        <div class="ic-row"><span class="ic-label">Next auto TX</span><span class="ic-val purple">Scheduled · policy-bound</span></div>
+      </div>
+      <div class="progress-wrap"><div class="progress-fill purple" id="prog-a3"></div></div>
+    </div>`;
+    setTimeout(()=>{const p=document.getElementById('prog-a3');if(p)p.style.width='100%';},100);
+    const liveTxA = lastLiveEvaluation?.anchor?.txid;
+    queueLogs([
+      ['tx','TX','anchoring execution on Solana...','teal'],
+      ['tx','TX', liveTxA ? `txID: ${liveTxA}` : 'fetching live txid...','dim'],
+      ['ok','OK','anchored · ~5s · audit trail complete','green'],
+      ['auto','AUTO','human notified · next execution scheduled','purple'],
+    ]);
+  }
+}
+
+// ─── INIT ────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  renderStep();
+  addLog('verun','VERUN','Verun Network online · Solana Devnet','teal');
+  addLog('verun','VERUN','Select a mode to begin demo','dim');
+  // Fire the live evaluate call in the background so step 3 has a real testnet TXID by the time the user clicks.
+  if (!liveDemoPromise) liveDemoPromise = runLiveDemo().catch(()=>{}).finally(()=>{ liveDemoPromise = null; });
+});
+</script>
+</body>
+</html>

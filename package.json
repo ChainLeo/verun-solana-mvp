@@ -1,0 +1,21 @@
+{
+  "name": "verun-solana-mvp",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Verun MVP on Solana Devnet (3 validators, 2-of-3 consensus)",
+  "main": "src/api.js",
+  "scripts": {
+    "check": "node scripts/check.js",
+    "selftx": "node scripts/selftx.js",
+    "fund": "node scripts/fund.js",
+    "evaluate": "node src/evaluate.js",
+    "api": "node src/api.js",
+    "genkey": "node scripts/genkey.js"
+  },
+  "dependencies": {
+    "@solana/web3.js": "^1.98.4",
+    "bs58": "^6.0.0",
+    "dotenv": "^16.6.1",
+    "express": "^4.22.1"
+  }
+}
