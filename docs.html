@@ -210,16 +210,10 @@ body.dark .live-badge{background:rgba(22,163,74,0.12);color:#4ade80;border-color
     <div class="tb-icon">V</div>
     <span class="tb-site-name">Verun — Solana Docs</span>
   </div>
-  <div class="tb-center">
-    <div class="tb-search">
-      <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="9" r="7"/><path d="m15 15 4 4"/></svg>
-      Search docs…
-      <kbd>⌘ K</kbd>
-    </div>
-  </div>
+  <div class="tb-center"></div>
   <div class="tb-right">
     <a class="tb-link" href="https://www.bcpp.io" target="_blank">BCP Partners</a>
-    <a class="tb-link" href="https://github.com/rafaschul/verun-solana-mvp" target="_blank">GitHub ↗</a>
+    <a class="tb-link" href="https://github.com/Fahad00674/verun-solana-mvp" target="_blank">GitHub ↗</a>
     <button class="tb-theme-btn" onclick="toggleTheme()"><span id="theme-icon">☀️</span> <span id="theme-lbl">Light</span></button>
   </div>
 </div>
@@ -259,7 +253,7 @@ body.dark .live-badge{background:rgba(22,163,74,0.12);color:#4ade80;border-color
   <a class="nav-item" href="https://docs.tokenforge.io/tokensuite-docs" target="_blank">
     <span class="nav-item-icon">↗</span> tokenforge Docs <span class="nav-item-ext">↗</span>
   </a>
-  <a class="nav-item" href="https://github.com/rafaschul/verun-solana-mvp" target="_blank">
+  <a class="nav-item" href="https://github.com/Fahad00674/verun-solana-mvp" target="_blank">
     <span class="nav-item-icon">↗</span> GitHub Repo <span class="nav-item-ext">↗</span>
   </a>
   <a class="nav-item" href="https://verun-solana-mvp.vercel.app" target="_blank">
@@ -591,13 +585,13 @@ body.dark .live-badge{background:rgba(22,163,74,0.12);color:#4ade80;border-color
   "anchor": {
     "txid": "5J7XK8L9aBcDe1FgHi2JkLm3NoPq4RsTu5VwXyZ9aBcDe1FgHi2JkLm3NoPq4RsTu",
     "ledger": "62604931",
-    "explorer": "https://explorer.solana.com/tx/5J7XK8L9aBcDe1FgHi2JkLm3NoPq4RsTu5VwXyZ9aBcDe1FgHi2JkLm3NoPq4RsT?cluster=devnetu?cluster=devnet"
+    "explorer": "https://explorer.solana.com/tx/5J7XK8L9aBcDe1FgHi2JkLm3NoPq4RsTu5VwXyZ9aBcDe1FgHi2JkLm3NoPq4RsT?cluster=devnet"
   }
 }</code></pre>
   </div>
   <div class="code-block">
     <div class="code-header"><span>curl example</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
-    <pre><code class="language-bash">curl -X POST https://verun-solana-mvp.vercel.app/api/evaluate \
+    <pre><code class="language-bash">curl -L -X POST https://verun-solana-mvp.vercel.app/api/evaluate \
   -H "Content-Type: application/json" \
   -d '{"agentId":"agt_demo","score":820,"operation":"transfer"}'</code></pre>
   </div>
@@ -655,7 +649,7 @@ body.dark .live-badge{background:rgba(22,163,74,0.12);color:#4ade80;border-color
     <pre><code class="language-bash">https://explorer.solana.com/tx/{txid}
 
 # Example live anchor:
-https://explorer.solana.com/tx/5J7XK8L9aBcDe1FgHi2JkLm3NoPq4RsTu5VwXyZ9aBcDe1FgHi2JkLm3NoPq4RsT?cluster=devnetu?cluster=devnet</code></pre>
+https://explorer.solana.com/tx/5J7XK8L9aBcDe1FgHi2JkLm3NoPq4RsTu5VwXyZ9aBcDe1FgHi2JkLm3NoPq4RsT?cluster=devnet</code></pre>
   </div>
   <h2>Protocol Wallet</h2>
   <table class="doc-table">
@@ -689,7 +683,7 @@ https://explorer.solana.com/tx/5J7XK8L9aBcDe1FgHi2JkLm3NoPq4RsTu5VwXyZ9aBcDe1FgH
   </div>
 
   <h2>Wallet Architecture (Protocol-Custodial)</h2>
-  <p>Verun's Solana deployment uses a <strong>protocol-custodial</strong> model — a single responsible party is the issuer, agents do not hold private keys. This matches the Algorand MVP and aligns with EU AI Act Art. 14 (human oversight) + MiFID II Art. 17 (kill-switch).</p>
+  <p>Verun's Solana deployment uses a <strong>protocol-custodial</strong> model — a single responsible party is the issuer, agents do not hold private keys. Aligns with EU AI Act Art. 14 (human oversight) + MiFID II Art. 17 (kill-switch).</p>
 
   <table class="doc-table">
     <thead><tr><th>Party</th><th>Wallet?</th><th>Holds</th></tr></thead>
@@ -767,7 +761,7 @@ https://explorer.solana.com/tx/5J7XK8L9aBcDe1FgHi2JkLm3NoPq4RsTu5VwXyZ9aBcDe1FgH
   <p>Anyone — tokenforge, an auditor, a regulator — can verify the credential directly against Solana RPC. No Verun API call required.</p>
   <div class="code-block">
     <div class="code-header"><span>GET /api/sbt-status?agentId=&lt;id&gt;</span></div>
-    <pre><code class="language-bash">curl https://verun-solana-mvp.vercel.app/api/sbt-status?agentId=agt_fahad_001
+    <pre><code class="language-bash">curl -L https://verun-solana-mvp.vercel.app/api/sbt-status?agentId=agt_fahad_001
 
 # Active credential:
 { "ok": true, "credentialed": true, "credential": { "tier": "MED", "score": 720, "ts": "2026-05-04T18:40:53.913Z" } }
@@ -946,7 +940,7 @@ Docs: https://verun-solana-mvp.vercel.app/docs.html</pre>
   <span class="k">"anchor"</span>: { <span class="k">"status"</span>: <span class="s">"anchored"</span>, <span class="k">"round"</span>: <span class="v">12345678</span> }
 }</div>
 
-  <div class="hint note">🔗 <strong>On-chain proof:</strong> every <code>txid</code> is verifiable at <a href="https://explorer.solana.com/?cluster=devnet" target="_blank">explorer.solana.com/explorer/testnet</a> — immutable, timestamped, auditable.</div>
+  <div class="hint note">🔗 <strong>On-chain proof:</strong> every <code>txid</code> is verifiable at <a href="https://explorer.solana.com/?cluster=devnet" target="_blank">Solana Explorer (Devnet)</a> — immutable, timestamped, auditable.</div>
 
   <h2>Operation Reference</h2>
   <table class="api-table">
@@ -958,7 +952,7 @@ Docs: https://verun-solana-mvp.vercel.app/docs.html</pre>
     </tbody>
   </table>
 
-  <div class="hint info">📋 <strong>AGENT.md</strong> — the full machine-readable version of this prompt lives in the <a href="https://github.com/rafaschul/verun-solana-mvp/blob/main/AGENT.md" target="_blank">GitHub repo</a> for direct agent ingestion.</div>
+  <div class="hint info">📋 <strong>AGENT.md</strong> — the full machine-readable version of this prompt lives in the <a href="https://github.com/Fahad00674/verun-solana-mvp/blob/main/AGENT.md" target="_blank">GitHub repo</a> for direct agent ingestion.</div>
 
   <div class="next-prev"><button class="next-btn" onclick="show('roadmap')"><div><span class="next-btn-lbl">Next</span>Mainnet Roadmap →</div></button></div>
 </div>
@@ -1253,7 +1247,7 @@ Docs: https://verun-solana-mvp.vercel.app/docs.html</pre>
 
   </div><!-- end diagram -->
 
-  <div class="hint note">🔷 <strong>Solana specifics:</strong> <code>timebounds</code> + <code>memo.hash</code> handle tx expiry and verdict commitment. Base fee is 100 lamports (~0.00001 SOL). Soroban contracts are available for future versions. Memo Instructions serve as the on-chain referral anchor.</div>
+  <div class="hint note">🔷 <strong>Solana specifics:</strong> <code>timebounds</code> + <code>memo.hash</code> handle tx expiry and verdict commitment. Base fee is 100 lamports (~0.00001 SOL). Memo Instructions serve as the on-chain referral anchor.</div>
 
 </div>
 
@@ -1268,10 +1262,9 @@ Docs: https://verun-solana-mvp.vercel.app/docs.html</pre>
 <div id="footer">
   <span class="footer-txt">© 2026 <a href="https://www.bcpp.io" target="_blank">BCP Partners GmbH</a> · All rights reserved</span>
   <span class="footer-txt">
-    <a href="https://github.com/rafaschul/verun-solana-mvp" target="_blank">GitHub</a>
+    <a href="https://github.com/Fahad00674/verun-solana-mvp" target="_blank">GitHub</a>
     · <a href="https://verun-solana-mvp.vercel.app" target="_blank">Live Demo</a>
     · <a href="https://www.bcpp.io/contact-us" target="_blank">Contact</a>
-    · <a href="https://www.bcpp.io" target="_blank">Impressum</a>
   </span>
 </div>
 

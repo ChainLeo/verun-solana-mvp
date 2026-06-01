@@ -41,7 +41,7 @@ Docs: https://verun-solana-mvp.vercel.app/docs.html
 ### Evaluate Agent
 
 ```bash
-curl -X POST https://verun-solana-mvp.vercel.app/api/evaluate \
+curl -L -X POST https://verun-solana-mvp.vercel.app/api/evaluate \
   -H "Content-Type: application/json" \
   -d '{"agentId":"agt_my_agent","score":820,"operation":"transfer"}'
 ```
@@ -67,7 +67,7 @@ curl -X POST https://verun-solana-mvp.vercel.app/api/evaluate \
 ### Health Check
 
 ```bash
-curl https://verun-solana-mvp.vercel.app/api/health
+curl -L https://verun-solana-mvp.vercel.app/api/health
 ```
 
 ---
@@ -115,7 +115,7 @@ Every evaluation is anchored as a **Memo Instruction on Solana Devnet**: a 1-lam
 
 - **Landing Page:** https://verun-solana-mvp.vercel.app
 - **Tech Docs:** https://verun-solana-mvp.vercel.app/docs.html
-- **GitHub:** https://github.com/rafaschul/verun-solana-mvp
+- **GitHub:** https://github.com/Fahad00674/verun-solana-mvp
 - **Contact:** https://www.bcpp.io/contact-us
 
 © 2026 BCP Partners GmbH
