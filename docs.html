@@ -226,7 +226,7 @@ body.dark .live-badge{background:rgba(22,163,74,0.12);color:#4ade80;border-color
   <a class="nav-item" onclick="show('overview')" href="javascript:void(0)"><span class="nav-item-icon">📖</span> Overview</a>
   <a class="nav-item" onclick="show('architecture')" href="javascript:void(0)"><span class="nav-item-icon">🏗️</span> Architecture</a>
   <a class="nav-item" onclick="show('trust-gates')" href="javascript:void(0)"><span class="nav-item-icon">🔐</span> Trust Score Gates</a>
-  <a class="nav-item" onclick="show('mica')" href="javascript:void(0)"><span class="nav-item-icon">⚖️</span> Potential MiCA Features</a>
+  <a class="nav-item" onclick="show('mica')" href="javascript:void(0)"><span class="nav-item-icon">⚖️</span> MiFID II + AI Act</a>
   <a class="nav-item" onclick="show('validators')" href="javascript:void(0)"><span class="nav-item-icon">🛡️</span> Validator Model</a>
   <div class="nav-group-label">API Reference</div>
   <a class="nav-item" onclick="show('api')" href="javascript:void(0)"><span class="nav-item-icon">⚡</span> Endpoints</a>
@@ -272,12 +272,15 @@ body.dark .live-badge{background:rgba(22,163,74,0.12);color:#4ade80;border-color
   <h1>Verun Protocol — Solana</h1>
   <p style="margin-bottom:12px">
     <span class="live-badge"><span class="live-dot"></span>LIVE on Solana Devnet</span>
-    &nbsp;&nbsp;<span style="font-size:12px;color:var(--text-muted)">Deployed April 2026 · 4 API Endpoints · v0.1.0</span>
+    &nbsp;&nbsp;<span style="font-size:12px;color:var(--text-muted)">Deployed April 2026 · 10 API Endpoints · v0.1.0</span>
   </p>
-  <p class="lead">Technical documentation for <strong>Verun Protocol</strong> — the AI Agent Trust Layer with potential MiCA features for regulated European finance, built on Solana by <a href="https://www.bcpp.io" target="_blank">BCP Partners GmbH</a>.</p>
+  <p class="lead">Technical documentation for <strong>Verun Protocol</strong> — the AI Agent Trust Layer designed to complement MiFID II + EU AI Act obligations for regulated European finance, built on Solana by <a href="https://www.bcpp.io" target="_blank">BCP Partners GmbH</a>.</p>
   <div class="hint info">
     🔐 <strong>"KYC for humans. KYA for agents. Both auditable on-chain."</strong><br>
-    Verun issues consensus-based Trust Scores (0–1000) that gate access to the tokenforge Chain API. Every evaluation is anchored as a Memo Instruction on Solana — immutable, auditable. Potential on-chain MiCA features — to be checked and prior to legal audit.
+    Verun issues consensus-based Trust Scores (0–1000) that gate access to the tokenforge Chain API. Every evaluation is anchored as a Memo Instruction on Solana — immutable, auditable. The design intent is to generate machine-readable audit trails that could complement MiFID II Art. 17 + EU AI Act Art. 14 obligations, subject to independent legal review.
+  </div>
+  <div class="hint" style="margin-top:12px;background:#fffbeb;border-color:#f59e0b;color:#78350f">
+    <strong>Disclosure:</strong> Devnet prototype · design intent · not legally certified · not investment advice. Statements about partners, integrations and compliance alignment (MiFID II, EU AI Act, tokenforge) are exploratory and subject to confirmation. Independent legal review planned Q3 2026.
   </div>
   <div class="parts-grid">
     <a class="part-card" onclick="show('architecture')" href="javascript:void(0)">
@@ -306,7 +309,7 @@ body.dark .live-badge{background:rgba(22,163,74,0.12);color:#4ade80;border-color
   <h2>What is Verun?</h2>
   <p>As AI agents begin autonomously executing token transfers, minting securities, and placing investment orders, there is no existing standard for establishing <em>who</em> an agent is, whether it can be trusted, and whether it is permitted to act in a regulated context.</p>
   <p>Verun solves this with the <strong>Verun Accredited Agent Score (0–1000)</strong>: a consensus-based trust verdict issued by registered validators, anchored on Solana for every evaluation, and enforced at the tokenforge Chain API gate.</p>
-  <div class="hint note">🔮 <strong>Regulatory context:</strong> Verun is designed to generate the machine-readable audit trail relevant to MiCA Art. 67, Art. 72, and Art. 75 for agents acting in regulated financial workflows. These are potential on-chain features — not verified compliance. Verun aggregates existing compliance signals into a single, auditable verdict; legal audit planned Q3 2026.</div>
+  <div class="hint note">🔮 <strong>Regulatory context (exploratory):</strong> Verun's design is shaped by the obligations in <strong>MiFID II Art. 17</strong> (algorithmic trading governance + records) and <strong>EU AI Act Art. 14</strong> (high-risk-AI human oversight + logging). The aim is to produce machine-readable audit trails that <em>could</em> complement these obligations. Independent legal review planned. Nothing on this page constitutes certified compliance or legal advice.</div>
   <h2>Key Facts</h2>
   <table class="doc-table">
     <thead><tr><th>Property</th><th>Value</th></tr></thead>
@@ -356,7 +359,7 @@ body.dark .live-badge{background:rgba(22,163,74,0.12);color:#4ade80;border-color
       </div>
       <div style="padding:0 8px;color:var(--text-muted);font-size:18px;flex-shrink:0">→</div>
       <div style="text-align:center;flex:1">
-        <div style="border:1px solid #ddd6fe;background:var(--violet-bg);border-radius:6px;padding:10px 14px;color:#5b21b6;font-weight:600;font-size:12px">Solana<br><span style="font-size:10px;opacity:.7;font-weight:400">Note Tx Anchor</span></div>
+        <div style="border:1px solid #ddd6fe;background:var(--violet-bg);border-radius:6px;padding:10px 14px;color:#5b21b6;font-weight:600;font-size:12px">Solana<br><span style="font-size:10px;opacity:.7;font-weight:400">Memo Tx Anchor</span></div>
         <div style="font-size:10px;color:var(--text-muted);margin-top:5px">Audit Trail</div>
       </div>
       <div style="padding:0 8px;color:var(--text-muted);font-size:18px;flex-shrink:0">→</div>
@@ -421,42 +424,42 @@ body.dark .live-badge{background:rgba(22,163,74,0.12);color:#4ade80;border-color
       <tr><td class="td-name" style="color:#6b7280!important">BLOCK</td><td>0 – 299</td><td>None — access denied</td><td>0%</td></tr>
     </tbody>
   </table>
-  <div class="next-prev"><button class="next-btn" onclick="show('mica')"><div><span class="next-btn-lbl">Next</span>Potential MiCA Features →</div></button></div>
+  <div class="next-prev"><button class="next-btn" onclick="show('mica')"><div><span class="next-btn-lbl">Next</span>MiFID II + AI Act →</div></button></div>
 </div>
 
 <!-- MICA -->
 <div id="page-mica" style="display:none">
-  <h1>Potential On-Chain MiCA Features</h1>
-  <p class="lead">Verun is designed with MiCA obligations in mind for AI agents acting in regulated European financial operations. The features below are <strong>potential on-chain implementations</strong> — to be checked and prior to legal audit. Not a compliance statement.</p>
-  <div class="hint success">⚖️ <strong>Scope:</strong> MiCA (Markets in Crypto-Assets Regulation) came into full effect December 2024 across all EU member states. The features below are <strong>potential on-chain implementations</strong> designed to support MiCA alignment. They are not a legal compliance statement and have not yet been audited.</div>
-  <h2>Potential On-Chain Features per Article</h2>
+  <h1>MiFID II + EU AI Act — Design Intent</h1>
+  <p class="lead">Verun's design is informed by, and intended to <em>complement</em>, the audit obligations financial institutions already carry under <strong>MiFID II Art. 17</strong> (algorithmic trading governance) and the <strong>EU AI Act</strong> (high-risk AI logging + human oversight). Nothing on this page is a compliance certification or legal opinion.</p>
+  <div class="hint success">⚖️ <strong>Important:</strong> The mapping below reflects the team's <em>design intent</em>. It has not been independently audited or endorsed by any regulator. Institutions using Verun remain responsible for their own compliance posture under applicable law.</div>
+  <h2>Design Mapping (exploratory)</h2>
   <table class="doc-table">
-    <thead><tr><th>Article</th><th>Requirement</th><th>Potential Verun Feature</th></tr></thead>
+    <thead><tr><th>Article</th><th>Obligation (institution-side)</th><th>What Verun explores</th></tr></thead>
     <tbody>
       <tr>
-        <td class="td-name">Art. 67</td>
-        <td>Operational Risk Management</td>
-        <td>Every evaluation anchored on-chain. Anchor failure is non-blocking — verdict is preserved regardless.</td>
+        <td class="td-name">MiFID II Art. 17</td>
+        <td>Algorithmic trading governance + complete records</td>
+        <td>Every prototype evaluation is anchored on Solana Devnet via Memo Instruction. Score, consensus, operation, timestamp — recorded for replay.</td>
       </tr>
       <tr>
-        <td class="td-name">Art. 68</td>
-        <td>CASP Authorization</td>
-        <td>Score-gated access. No agent may call tokenforge Chain API without a valid Verun verdict ≥ 300.</td>
+        <td class="td-name">EU AI Act Art. 14</td>
+        <td>Human oversight of high-risk AI systems</td>
+        <td>Design supports human-in-the-loop approval above defined operation tiers; validator consensus is institutional/human-controlled.</td>
       </tr>
       <tr>
-        <td class="td-name">Art. 72</td>
-        <td>AML/CFT Obligations</td>
-        <td>2-of-N validator consensus before any transfer or mint operation. Single-validator manipulation impossible.</td>
+        <td class="td-name">EU AI Act Art. 12</td>
+        <td>Automatic logging of high-risk AI activity</td>
+        <td>Every verdict, approval, and revocation written to Solana in the prototype — a replayable evaluation log.</td>
       </tr>
       <tr>
-        <td class="td-name">Art. 75</td>
-        <td>Record-Keeping / Audit Trail</td>
-        <td>Solana Memo Instruction per verdict. Timestamp, agentId, score, consensus, operation all written on-chain.</td>
+        <td class="td-name">MiFID II Art. 17(2)</td>
+        <td>Kill-switch / system controls</td>
+        <td>Prototype SBT revocation flow — credential can be burned by issuer via single Solana transaction, removing the agent's permissioned access in subsequent evaluations.</td>
       </tr>
     </tbody>
   </table>
-  <div class="hint note">🔮 <strong>tokenforge alignment:</strong> tokenforge (TokenSuite) is eWpG-compliant, BaFin-relevant, and MiFID II-ready. The Verun × tokenforge integration is designed to extend this compliance stack to the agentic layer — subject to legal review.</div>
-  <div class="hint info">📋 <strong>Legal audit status:</strong> MiCA compliance audit is planned for Q3 2026 as part of the Solana Foundation grant milestones. Until then, all features on this page represent design intent, not verified compliance.</div>
+  <div class="hint note">🔮 <strong>tokenforge — exploratory:</strong> tokenforge (TokenSuite) is a German Security Token infrastructure with eWpG-aware design. Any Verun × tokenforge integration described in these docs is exploratory and subject to commercial and regulatory finalisation.</div>
+  <div class="hint info">📋 <strong>Audit status:</strong> Independent legal audit is planned. Until that is complete, every statement on this page should be read as design intent, not as a compliance assertion or legal advice. Timelines and milestones are subject to change.</div>
   <div class="next-prev"><button class="next-btn" onclick="show('validators')"><div><span class="next-btn-lbl">Next</span>Validator Model →</div></button></div>
 </div>
 
@@ -629,9 +632,9 @@ body.dark .live-badge{background:rgba(22,163,74,0.12);color:#4ade80;border-color
   <h2>How It Works</h2>
   <p>After validator consensus is reached, the Verun protocol wallet sends a <strong>self-payment of 1 lamport (0.000000001 SOL)</strong> with <code>sha256(verdict)</code> in the <code>memo</code> field (32-byte hash). The transaction is confirmed in ~1 second on Solana.</p>
   <div class="hint success">✅ <strong>Non-blocking design:</strong> If the anchor fails (e.g. wallet unfunded), the verdict is still returned. The anchor failure is reported as <code>anchor.status: "anchor_failed"</code> — the evaluation result is never withheld.</div>
-  <h2>Anchor Payload (note field)</h2>
+  <h2>Anchor Payload (memo instruction)</h2>
   <div class="code-block">
-    <div class="code-header"><span>Note field JSON (on-chain)</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+    <div class="code-header"><span>Memo instruction JSON (on-chain)</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
     <pre><code class="language-json">{
   "agentId": "agt_demo",
   "score": 820,
@@ -699,7 +702,7 @@ https://explorer.solana.com/tx/5J7XK8L9aBcDe1FgHi2JkLm3NoPq4RsTu5VwXyZ9aBcDe1FgH
   </div>
 
   <h2>How the credential lives on-chain</h2>
-  <p>The SBT is <strong>not a Solana asset</strong> in the traditional sense — it's a <code>SPL-Memo</code> entry on the protocol account. That means there is no asset balance, no trustline, no agent-side signature required. The "token" is a key-value pair stored permanently on the issuer's account.</p>
+  <p>The SBT is <strong>not a Solana asset</strong> in the traditional sense — it's a <code>SPL-Memo</code> entry on the protocol account. That means there is no asset balance, no associated token account, no agent-side signature required. The "token" is a key-value pair stored permanently on the issuer's account.</p>
 
   <table class="doc-table">
     <thead><tr><th>Field</th><th>Format</th><th>Example</th></tr></thead>
@@ -727,10 +730,10 @@ https://explorer.solana.com/tx/5J7XK8L9aBcDe1FgHi2JkLm3NoPq4RsTu5VwXyZ9aBcDe1FgH
   "ts": "2026-04-30T14:40:53.913Z",
   "key": "vtrust_agt_fahad_001",
   "txid": "5J7XK8L9aBcDe1FgHi2JkLm3NoPq4RsTu5VwXyZ9aBcDe1FgHi2JkLm3NoPq4RsTu",
-  "ledger": "323456789"  // (Solana slot),
+  "slot": 323456789,
   "credential_hash": "4f3aaa283c7cf13ff7427fd9560b49314baaf40bf790efb78cc4e3e00a45ea6d",
   "issuer": "<PROTOCOL_PUBKEY>",
-  "explorer": "https://explorer.solana.com/tx/a6013d9?cluster=devnetd?cluster=devnet...",
+  "explorer": "https://explorer.solana.com/tx/a6013d9...?cluster=devnet",
   "verify_url": "https://verun-solana-mvp.vercel.app/api/sbt-status?agentId=agt_fahad_001"
 }</code></pre>
   </div>
@@ -795,9 +798,9 @@ cd verun-solana-mvp &amp;&amp; chmod +x scripts/sbt-demo.sh
   <table class="doc-table">
     <thead><tr><th>Regulation</th><th>Article</th><th>Verun mechanism</th></tr></thead>
     <tbody>
-      <tr><td class="td-name">MiCA</td><td>Art. 68</td><td>2-of-3 validator consensus + on-chain audit trail</td></tr>
-      <tr><td class="td-name">EU AI Act</td><td>Art. 14</td><td>Validators are human/institutional — every action gated by their consensus</td></tr>
-      <tr><td class="td-name">MiFID II</td><td>Art. 17</td><td>Single-TX kill-switch via revoke endpoint (~5s)</td></tr>
+      <tr><td class="td-name">MiFID II</td><td>Art. 17</td><td>2-of-3 validator consensus + on-chain audit trail · single-TX kill-switch via revoke endpoint (~1s)</td></tr>
+      <tr><td class="td-name">EU AI Act</td><td>Art. 14</td><td>Validators are human/institutional — every action gated by their consensus (human oversight)</td></tr>
+      <tr><td class="td-name">EU AI Act</td><td>Art. 12</td><td>Automatic logging — every verdict + approval anchored on Solana</td></tr>
     </tbody>
   </table>
 
@@ -807,7 +810,7 @@ cd verun-solana-mvp &amp;&amp; chmod +x scripts/sbt-demo.sh
 <!-- ROADMAP -->
 <div id="page-roadmap" style="display:none">
   <h1>Mainnet Roadmap</h1>
-  <p class="lead">From Solana Devnet MVP to production infrastructure with legal-audited MiCA alignment.</p>
+  <p class="lead">From Solana Devnet MVP toward a more production-grade design, with independent legal review of MiFID II + EU AI Act alignment. Timelines and scope are indicative and subject to change.</p>
   <div class="timeline">
     <div class="tl-item">
       <div class="tl-left">
@@ -852,11 +855,11 @@ cd verun-solana-mvp &amp;&amp; chmod +x scripts/sbt-demo.sh
       </div>
       <div class="tl-body">
         <div class="tl-period">Q3 2026</div>
-        <div class="tl-title">Solana Mainnet + MiCA Audit</div>
-        <div class="tl-desc">Migration from testnet to mainnet. Third production validator onboarded. Full MiCA legal audit + compliance documentation. Solana Foundation grant milestone delivery.</div>
+        <div class="tl-title">Solana Mainnet + Legal Review</div>
+        <div class="tl-desc">Targeted migration from devnet to mainnet. Onboarding a third production validator. Independent legal review of MiFID II + EU AI Act alignment. Solana Foundation grant milestone delivery — final scope subject to confirmation.</div>
         <div class="tl-chips">
           <span class="chip">Mainnet</span>
-          <span class="chip">MiCA audit</span>
+          <span class="chip">MiFID II + AI Act review</span>
           <span class="chip">3rd validator</span>
           <span class="chip">Grant M3</span>
         </div>
@@ -925,19 +928,19 @@ Docs: https://verun-solana-mvp.vercel.app/docs.html</pre>
 
   <h2>Step 2 — Make the API Call</h2>
   <p>Your agent calls <code>/api/evaluate</code> before any operation. Replace <code>YOUR_AGENT_ID</code> with your agent's identifier.</p>
-  <div class="code-block"><span class="k">curl</span> -X POST https://verun-solana-mvp.vercel.app/api/evaluate \
+  <div class="code-block"><span class="k">curl</span> -L -X POST https://verun-solana-mvp.vercel.app/api/evaluate \
   -H <span class="s">"Content-Type: application/json"</span> \
   -d <span class="s">'{"agentId":"agt_my_agent","score":820,"operation":"transfer"}'</span></div>
 
   <h2>Step 3 — Read the Verdict</h2>
-  <p>Verun returns a verdict with an Solana TXID as immutable proof.</p>
+  <p>Verun returns a verdict with a Solana TXID as immutable proof.</p>
   <div class="code-block">{
   <span class="k">"permitted"</span>: <span class="v">true</span>,
   <span class="k">"consensus"</span>: <span class="s">"LOW"</span>,
   <span class="k">"operation"</span>: <span class="s">"transfer"</span>,
   <span class="k">"score"</span>: <span class="v">820</span>,
   <span class="k">"txid"</span>: <span class="s">"SOLANA_DEVNET_SIGNATURE"</span>,
-  <span class="k">"anchor"</span>: { <span class="k">"status"</span>: <span class="s">"anchored"</span>, <span class="k">"round"</span>: <span class="v">12345678</span> }
+  <span class="k">"anchor"</span>: { <span class="k">"status"</span>: <span class="s">"anchored"</span>, <span class="k">"slot"</span>: <span class="v">323456789</span> }
 }</div>
 
   <div class="hint note">🔗 <strong>On-chain proof:</strong> every <code>txid</code> is verifiable at <a href="https://explorer.solana.com/?cluster=devnet" target="_blank">Solana Explorer (Devnet)</a> — immutable, timestamped, auditable.</div>
@@ -1013,7 +1016,7 @@ Docs: https://verun-solana-mvp.vercel.app/docs.html</pre>
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid var(--border-light);min-height:48px;background:rgba(124,58,237,0.04)">
         <div style="padding:10px;border-right:1px solid var(--border-light)">
           <div style="font-style:italic;color:var(--text-muted);font-size:11px">construct PaymentTxn</div>
-          <div style="margin-top:4px;border:1px dashed #c4b5fd;border-radius:4px;padding:3px 8px;font-size:11px;color:#7c3aed;display:inline-block">sign ed25519 / LogicSig</div>
+          <div style="margin-top:4px;border:1px dashed #c4b5fd;border-radius:4px;padding:3px 8px;font-size:11px;color:#7c3aed;display:inline-block">sign ed25519</div>
         </div>
         <div style="border-right:1px solid var(--border-light);background:var(--bg-sidebar)"></div>
         <div style="border-right:1px solid var(--border-light)"></div>
@@ -1164,12 +1167,12 @@ Docs: https://verun-solana-mvp.vercel.app/docs.html</pre>
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid var(--border-light);min-height:40px;background:rgba(156,163,175,0.04)">
         <div style="border-right:1px solid var(--border-light)"></div>
         <div style="padding:10px;border-right:1px solid var(--border-light);background:var(--bg-sidebar);display:flex;align-items:center;justify-content:flex-end;gap:6px;color:var(--text-muted);font-size:11px">
-          write lead referral (Note Tx)
+          write lead referral (Memo Tx)
           <span style="color:var(--text-muted);font-size:16px">→</span>
         </div>
         <div style="padding:10px;border-right:1px solid var(--border-light);font-size:11px;color:var(--text-muted);display:flex;align-items:center">
         </div>
-        <div style="padding:10px;font-size:11px;color:var(--text-muted);display:flex;align-items:center">→ Solana Note Tx</div>
+        <div style="padding:10px;font-size:11px;color:var(--text-muted);display:flex;align-items:center">→ Solana Memo Tx</div>
       </div>
 
       <!-- Row 18 -->
@@ -1202,7 +1205,7 @@ Docs: https://verun-solana-mvp.vercel.app/docs.html</pre>
       <!-- E2 -->
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid var(--border-light);min-height:44px;background:rgba(220,38,38,0.03)">
         <div style="padding:10px;border-right:1px solid var(--border-light)">
-          <div style="font-size:11px;color:#dc2626;font-weight:600">E2: tx expired (max_round) → 402 auth_expired</div>
+          <div style="font-size:11px;color:#dc2626;font-weight:600">E2: blockhash expired (lastValidBlockHeight) → 402 auth_expired</div>
           <div style="font-size:10px;color:var(--text-muted);margin-top:2px">caught at GoPlausible</div>
         </div>
         <div style="border-right:1px solid var(--border-light);background:var(--bg-sidebar)"></div>
@@ -1247,7 +1250,7 @@ Docs: https://verun-solana-mvp.vercel.app/docs.html</pre>
 
   </div><!-- end diagram -->
 
-  <div class="hint note">🔷 <strong>Solana specifics:</strong> <code>timebounds</code> + <code>memo.hash</code> handle tx expiry and verdict commitment. Base fee is 100 lamports (~0.00001 SOL). Memo Instructions serve as the on-chain referral anchor.</div>
+  <div class="hint note">🔷 <strong>Solana specifics:</strong> <code>recentBlockhash</code> + <code>lastValidBlockHeight</code> handle tx expiry; <code>SPL-Memo</code> commits the verdict hash. Base fee is 5000 lamports (~0.000005 SOL). Memo Instructions serve as the on-chain referral anchor.</div>
 
 </div>
 
