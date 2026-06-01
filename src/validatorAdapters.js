@@ -1,11 +1,11 @@
 /**
- * Verun Validator Adapters (chain-agnostic — identical to the Stellar
- * and Algorand MVPs). Each adapter calls the validator's API/policy and
- * returns a normalised vote. On failure the validator is marked
+ * Verun Validator Adapters (chain-agnostic — identical pattern across
+ * Stellar / Solana MVPs). Each adapter calls the validator's API/policy
+ * and returns a normalised vote. On failure the validator is marked
  * UNAVAILABLE so consensus can still resolve.
  */
 
-// ─── Score-based vote (BCP Partners, Test Validator) ─────────────────────────
+// ─── Score-based vote (ERSTER, Test Validator) ───────────────────────────────
 function scoreBasedVote(validator, score, operation) {
   const gates = { read: 300, transfer: 500, mint: 500, order: 600 };
   const required = gates[operation] ?? 300;
@@ -42,7 +42,7 @@ async function tokenforgeVote(validator, agentId, score, operation) {
 // ─── Router ───────────────────────────────────────────────────────────────────
 async function callValidator(validator, agentId, score, operation) {
   switch (validator.id) {
-    case 'val-bcp-01':
+    case 'val-erster-01':
     case 'val-test-03':
       return scoreBasedVote(validator, score, operation);
     case 'val-tokenforge-02':

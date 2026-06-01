@@ -30,7 +30,7 @@ If verdict is denied or pending, notify the human supervisor.
 Never execute financial operations without a valid Verun verdict.
 
 Network: Solana Devnet
-Validators: tokenforge · BCP Partners
+Validators: tokenforge · ERSTER
 Docs: https://verun-solana-mvp.vercel.app/docs.html
 ```
 
@@ -104,7 +104,7 @@ Every evaluation is anchored as a **Memo Instruction on Solana Devnet**: a 1-lam
 | Name | Type | Policy |
 |------|------|--------|
 | tokenforge | Founding Validator | Chain API (eWpG, BaFin) |
-| BCP Partners | Founding Validator | Score-based |
+| ERSTER | Founding Validator | Score-based |
 | Test Validator | Testnet only | Score-based |
 
 2-of-3 consensus required for a valid verdict.
