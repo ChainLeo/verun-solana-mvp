@@ -1,5 +1,7 @@
 # Verun Solana MVP
 
+> **Migration in progress — 8 October 2026.** The current product charges for opportunity scans through the shared ASP gateway, with Solana x402 as a payment rail. VERUN validator consensus is retired. The runtime below is the historical demo and has not yet been migrated. See [the migration work packages](docs/PRODUCT_MIGRATION.md).
+
 The Trust Layer for Agentic Finance — anchored on **Solana Devnet**.
 
 A 2-of-3 validator consensus protocol that scores AI agents and writes every verdict to Solana as a memo-anchored transaction (sha256 of the verdict payload, anchored via an SPL-Memo instruction + 1-lamport self-transfer).
