@@ -2,7 +2,11 @@
 
 The public deployment is static documentation plus legacy HTTP 410 responses.
 It has no payment proxy, payer key, gateway token or automatic wallet funding.
-No application deployment has been performed in this migration checkpoint.
+Pushing the client branch triggered the existing Vercel GitHub integration: its
+preview build succeeded. The preview is protected by Vercel Authentication, so
+unauthenticated probes cannot establish route behavior there. No production
+promotion or funded payment has been performed. Local route checks are separate
+from the remaining authenticated preview acceptance.
 
 ## Review and test
 

@@ -21,8 +21,10 @@ Wiki page: **VERUN Solana Paid Opportunity Scans**.
 
 ## Current checkpoint — client migration
 
-SOL-01–03 are implemented in gateway draft PR #3. SOL-04/05 now have a
-local CLI and public guide candidate in this repository. No application deployment,
+SOL-01–03 are implemented in gateway PR #3, merged by NilsEngeln on 8 October
+at 18:19 UTC (merge 80fa199). SOL-04/05 now have a local CLI and public guide
+candidate in client draft PR #1. Its automatic Vercel preview build succeeded,
+but authenticated preview acceptance remains pending. No production promotion,
 funded payment, investment execution or mainnet activation has been performed.
 
 - Real prepare/approve/status/retry CLI using the official SVM SDK, pinned
