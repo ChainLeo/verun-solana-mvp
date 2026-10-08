@@ -1,101 +1,123 @@
-# Verun Solana MVP
+# VERUN Solana opportunity scan client
 
-> **Migration in progress — 8 October 2026.** The current product charges for opportunity scans through the shared ASP gateway, with Solana x402 as a payment rail. VERUN validator consensus is retired. The runtime below is the historical demo and has not yet been migrated. See [the migration work packages](docs/PRODUCT_MIGRATION.md).
+This repository now contains a local Solana devnet x402 client and a public
+product/client guide. Opportunity scans are the paid action in the shared
+[VERUN ASP gateway](https://github.com/verun-ai/verun-asp-gateway-mcp/pull/3).
+Opportunity details, explicit mandate checks and handoff preparation remain free.
+Payment does not establish investor eligibility or execute an investment.
 
-The Trust Layer for Agentic Finance — anchored on **Solana Devnet**.
+The validator, score and SBT implementation is retired. Existing API routes return
+HTTP 410. The historical implementation remains at
+`b9996739567e4c60024d6d1ed428437bd920cf58`.
 
-A 2-of-3 validator consensus protocol that scores AI agents and writes every verdict to Solana as a memo-anchored transaction (sha256 of the verdict payload, anchored via an SPL-Memo instruction + 1-lamport self-transfer).
+**Status:** implementation candidate, not activated or funded-tested. Development
+price: 5,000 atomic Circle devnet USDC units (0.005 test USDC) per scan. This is not
+a mainnet price. See [migration work packages](docs/PRODUCT_MIGRATION.md).
 
-This repo is a Solana port of [`verun-stellar-mvp`](https://github.com/Fahad00674/verun-stellar-mvp). Same API surface, same validator logic, same UI — only the chain has changed.
+## Local setup
 
-> **Secrets policy.** `.env.example` ships with placeholders only. Real keys live in your local `.env` (gitignored) and in Vercel project env vars. Run `npm run genkey` on first checkout — never commit `.env`.
+Use Node.js 22.13+ on macOS/Linux and `npm ci`. A reviewed gateway with the Solana
+adapter enabled must exist before a real test can run. Do not point this client
+at the old Solana demo or assume the gateway draft has been deployed.
 
-## Quick start (local)
+1. Copy `client.config.example.json` to a private local `client.config.json`.
+   Replace both placeholders with the operator-approved canonical HTTPS scan URL
+   and merchant receiving address. Obtain these independently of a 402 response.
+2. Put the gateway's **REST ASP token** in a private file (mode 0600). The MCP token
+   is separate. Never paste either token into a browser, prompt or ticket.
+3. For an authorized funded devnet test only, use an existing locally controlled
+   devnet payer keypair file: JSON array of 64 bytes, mode 0600. The client neither
+   generates/funds a wallet nor prints its private key. Never use a mainnet key.
+4. Export the following paths. The CLI does not automatically load `.env`:
 
-```bash
-npm install
-cp .env.example .env
-
-# 1. Generate a fresh keypair and fund it via Devnet airdrop
-npm run genkey
-# Paste the printed SOLANA_PUBLIC + SOLANA_SECRET (b58) into .env,
-# replacing the PASTE_BASE58_* placeholders.
-
-# 2. Sanity check
-npm run check    # prints address + SOL balance
-npm run selftx   # submits a real Devnet TX, prints explorer URL
-
-# 3. Run the API
-npm run api      # http://localhost:3010
+```sh
+export VERUN_CLIENT_CONFIG_FILE=/absolute/private/client.config.json
+export VERUN_GATEWAY_TOKEN_FILE=/absolute/private/gateway-token
+export SOLANA_PAYER_KEYPAIR_FILE=/absolute/private/devnet-payer.keypair.json
 ```
 
-Smoke test the live endpoints:
+Token and key files must be owned by the current user, private and not symlinks.
+The dedicated state directory is created with mode 0700; state files use 0600.
+The directory must remain private. `.verun-client/` is ignored by Git.
 
-```bash
-chmod +x scripts/smoke-live.sh
-./scripts/smoke-live.sh http://localhost:3010
-# All five checks should print green-tickable values.
+## Prepare, approve and recover
+
+Edit `query.example.json` or create your own query. The shared gateway validates
+its search schema before billing. Do not supply `requestId` or `paymentSignature`;
+the client creates and persists the request ID before its first network call.
+
+```sh
+npm run scan -- prepare --query query.example.json --state .verun-client/scan.json
 ```
 
-## API endpoints
+Preparation requests payment requirements without paying. Review the query,
+recipient, 0.005 test-USDC price, Solana devnet network and expiry. To explicitly
+approve this test payment:
 
-| Method | Path | Purpose |
-|---|---|---|
-| GET  | `/api/health`          | Service heartbeat |
-| GET  | `/api/validators`      | List validator set |
-| GET  | `/api/config-check`    | Validate SOLANA_SECRET, RPC reachability |
-| GET  | `/api/funding-status`  | Account balance + auto-airdrops if missing |
-| POST | `/api/score`           | Run validators only (no anchor) |
-| POST | `/api/evaluate`        | Run validators + anchor verdict on Solana Devnet |
-| POST | `/api/mint-sbt`        | Issue protocol-custodial SBT credential |
-| POST | `/api/revoke-sbt`      | Kill-switch: revoke an SBT credential |
-| GET  | `/api/sbt-status`      | Read latest credential state for one agent |
-| GET  | `/api/sbt-list`        | List all currently-credentialed agents |
+```sh
+npm run scan -- pay --state .verun-client/scan.json --approve-test-usdc
+```
 
-## Architecture mapping (Stellar → Solana)
+The official SVM SDK builds a v0 USDC transfer with the gateway's opaque scan
+reference as its memo. The client saves the signed payload durably **before**
+submitting it. It prints the gateway's actual scan result and bound receipt only
+on validated success; empty results are still a completed paid scan.
 
-| Stellar concept                       | Solana mapping                              |
-|---------------------------------------|---------------------------------------------|
-| Horizon Server                        | `Connection` (devnet RPC)                   |
-| Friendbot funding                     | `connection.requestAirdrop()`               |
-| `Memo.hash` + 1-stroop self-payment   | SPL-Memo instruction + 1-lamport self-transfer |
-| `manageData(name, value)` registry    | SPL-Memo audit trail (`vtrust-mint:` / `vtrust-revoke:` prefixes) on protocol account |
-| `account.data_attr[key]` lookup       | `getSignaturesForAddress` + parse memos     |
-| `manageData(name, null)` revoke       | `vtrust-revoke:<agentId>:...` memo TX       |
+```sh
+npm run scan -- status --state .verun-client/scan.json
+npm run scan -- retry --state .verun-client/scan.json
+```
 
-The SBT registry is the protocol account's transaction history of memo-tagged events. Latest event per `agentId` is the current state. Anyone can verify by running `getSignaturesForAddress(issuer)` against any Solana RPC — no Verun API call required.
+A retry reuses the exact saved body, request ID and signed payload. It never
+re-signs or creates a new purchase. It also recovers an unpaid preparation whose
+response was lost. It is safe to restart the CLI between these commands.
 
-> **Upgrade path:** drop in Token-2022 NonTransferable mints or Metaplex Core assets behind the same `/api/{mint,revoke,status,list}-sbt` surface when needed for production.
+Keep private state until settlement and fulfillment are resolved. Do not delete
+it, edit it or generate a fresh ID to recover uncertain settlement. A gateway
+`reconciliation`, `verifying` or `settling` state requires operator investigation.
+An expired signed payment is not automatically refreshed. An interrupted process
+leaves a `.lock` file: confirm that process has stopped, retain the state, then
+remove only its stale lock and inspect status. The gateway remains the authority
+for settlement; local file locking is an additional concurrency safeguard.
 
-## SBT scaling tradeoff (honest grant note)
+A genuinely new scan uses a new state filename after the prior purchase is
+resolved. This client currently supports one configured gateway principal and a
+local keypair signer. Browser wallet integration is deferred until the gateway's
+public end-user authentication model is defined; the public site never receives
+the shared ASP token or holds payer keys.
 
-The MVP's SBT model — memo events on the protocol account, scanned via `getSignaturesForAddress` — is **deliberately the simplest pattern that preserves the "anyone can verify on-chain" property of the Stellar version**. It is not a long-term scaling choice. The honest constraints:
+## Public guide and retired routes
 
-| Property | Current MVP | Implication |
-|---|---|---|
-| Lookup complexity | `O(n)` over recent signatures | `/api/sbt-status` and `/api/sbt-list` walk the protocol account's signature history each call. |
-| Scan window | `SBT_SCAN_LIMIT` env (default 200) | Only the last N transactions are inspected. A credential minted 1000 mints ago will appear as "not credentialed" if the cap is 200. |
-| `getSignaturesForAddress` ceiling | 1000 per call (Solana RPC limit) | True history requires paginated calls with `before` cursors — not implemented in the MVP. Practical demo cap is ~1000 lifetime mint+revoke events per protocol wallet. |
-| Per-call cost | 1 RPC request + N parsed-tx fetches in batches | On free public RPC this is the bottleneck — `/api/sbt-list` against 200 events takes 3–10s. Paid RPC (Helius / Triton / QuickNode) brings it under 1s. |
-| Cache | None | Every request hits RPC. A 30-second LRU on `agentId → state` would absorb most demo load. |
-| Eventual consistency | ~1–3s after `sendAndConfirmTransaction` returns | A status check immediately after mint may show `credentialed=false`; the SBT demo script sleeps 2s to compensate. |
+`npm run api` serves `public/` on `http://127.0.0.1:3010`. It does not proxy scans or
+load payment credentials. Only public files are served. `/api/health` reports
+`payments: local-client-only`; that is not gateway/payment readiness.
 
-**What the production version looks like.** Three options, ordered by lift:
+`score`, `evaluate`, `validators`, `mint-sbt`, `revoke-sbt`, `sbt-status`, `sbt-list`,
+`config-check` and `funding-status` return HTTP 410 under both `/` and `/api/`.
+Old faucet, key-printing, memo self-transfer and simulated investment scripts have
+been removed. See [deployment and rollback](DEPLOY.md).
 
-1. **Add an indexer.** Subscribe to the protocol account via WebSocket (`onLogs`), build an in-memory `agentId → latest_event` map, persist to Postgres / Redis. Lookup becomes `O(1)`. The on-chain transactions stay the source of truth — anyone can still rebuild the index from the chain.
-2. **Switch to Token-2022 NonTransferable mints.** Each agent gets a dedicated mint with `NonTransferable` extension; protocol holds mint + freeze authority. Status becomes "does the issuer's ATA hold a non-zero balance?", which is a single `getTokenAccountBalance` call. Revoke = burn. Scales to millions of credentials, but loses the single-account-as-registry simplicity.
-3. **Custom on-chain program.** A small Anchor program with a PDA per agent storing `(tier, score, ts, revoked_at)`. `O(1)` lookup, fully on-chain state, no indexer needed. This is the model regulators will eventually want for a MiCA audit. Cost: ~1 week to build + audit.
+## Verification
 
-The `/api/{mint,revoke,status,list}-sbt` surface is shaped to be invariant under all three migrations — only `src/sbt.js` swaps out.
+```sh
+npm run check
+npm audit
+# Build the matching gateway candidate first, then test the actual HTTP boundary:
+VERUN_GATEWAY_SOURCE=/absolute/path/to/verun-asp-gateway-solana npm run test:gateway
+```
 
-## Environment variables
+Unit/entry-point tests cover recovery, private storage, explicit approval,
+request/policy mismatch, legacy route retirement, static-file isolation and real
+SDK transaction construction/signature verification. The companion integration
+suite uses the actual gateway HTTP routes, SQLite and catalog, deliberately loses
+a paid response, then recovers the stored scan with exactly one signature and
+one mocked settlement. RPC reads and facilitator settlement are mocked. These
+checks do not prove funded on-chain settlement, fee sponsorship or live deployment.
 
-See `.env.example`. Required: `SOLANA_SECRET`. Optional: `SOLANA_PUBLIC`, `SOLANA_RPC`, `SOLANA_CLUSTER`, `SBT_SCAN_LIMIT`.
+SDK versions match the gateway: `@x402/core` and `@x402/svm` 2.19.0, Solana Kit
+5.1.0. `client/policy.js` mirrors the gateway signer policy; changes must update
+both and rerun the companion test. `qs` is overridden to patched 6.16.0; inherited
+`body-parser` and `proxy-addr` lockfile entries were updated without a framework
+major upgrade. The client audit reports zero vulnerabilities at this checkpoint.
 
-## Deploy
-
-See `DEPLOY.md` for the GitHub + Vercel walkthrough.
-
-## License
-
-MIT — © 2026 BCP Partners GmbH
+Reference: [official x402 buyer integration](https://docs.x402.org/getting-started/quickstart-for-buyers).

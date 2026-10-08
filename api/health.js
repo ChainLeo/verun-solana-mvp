@@ -1,3 +1,3 @@
-module.exports = async function handler(req, res) {
-  res.status(200).json({ ok: true, service: 'verun-solana-mvp', network: 'solana-devnet' });
-};
+export default function health(_req, res) {
+  return res.json({ ok: true, service: 'verun-solana-client', mode: 'documentation', payments: 'local-client-only', network: 'solana-devnet' });
+}

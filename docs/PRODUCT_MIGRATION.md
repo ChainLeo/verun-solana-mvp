@@ -19,21 +19,26 @@ Canonical implementation ledger: `docs/solana-work-packages.md` in
 `verun-ai/verun-asp-gateway-mcp`, branch `feat/solana-paid-opportunity-scans`.
 Wiki page: **VERUN Solana Paid Opportunity Scans**.
 
-## Current checkpoint
+## Current checkpoint — client migration
 
-SOL-01–03 are implemented/documented as a local gateway candidate; SOL-04 has a
-payer-side signing helper but this repo's legacy runtime is not migrated yet.
-The full plan must not be read as completed work. No application deployment,
-funded payment or mainnet activation has been performed.
+SOL-01–03 are implemented in gateway draft PR #3. SOL-04/05 now have a
+local CLI and public guide candidate in this repository. No application deployment,
+funded payment, investment execution or mainnet activation has been performed.
 
-The new gateway candidate uses 0.005 test USDC per scan on Solana devnet,
-server-authoritative pricing, signed opaque request references and durable
-replay/fulfillment controls. Its executable production restrictions remain.
+- Real prepare/approve/status/retry CLI using the official SVM SDK, pinned
+  devnet USDC and a separately approved endpoint/recipient.
+- Private durable state, payload persistence before submission and identical
+  recovery across process restarts. No automatically renewed payment.
+- Every old score/validator/SBT/config/funding route returns 410; old signing,
+  funding and fake execution code removed. Static serving is limited to public/.
+- Public copy, agent instructions and deployment guide describe opportunity scans.
+  Browser wallet integration is deferred until end-user authentication is defined;
+  a shared gateway secret must not be put in a public browser. The usable payer
+  integration in this package is the local CLI.
+- Tests include the actual local routes, serverless handlers, official SDK local
+  signing, and a companion actual gateway HTTP/SQLite/catalog test recovering a
+  lost response with one signature and one mocked settlement.
 
-Do not adapt `evaluateAgent` into the new payment service. Reuse the ASP gateway
-catalog, mandate/handoff contract and new SVM adapter. Old memo self-transfers
-are not payment receipts and caller-supplied scores are not authorization.
-
-Preserve baseline commit `b9996739567e4c60024d6d1ed428437bd920cf58` for historical
-reference/rollback. The next package removes the legacy surface rather than
-silently changing old score API calls into paid requests.
+The gateway candidate uses 0.005 test USDC per scan. Production restrictions stay.
+Preserve baseline `b9996739567e4c60024d6d1ed428437bd920cf58` for historical reference.
+SOL-06 remains pending operator configuration, funded acceptance and release review.
